@@ -1,526 +1,588 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project 083 — Urban & Riparian Revival</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --brand-navy: #1A3C5E;
-            --brand-teal: #2E7D6B;
-            --bg-light: #f4f7f6;
-            --text-dark: #333;
-        }
-        
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Project 083 — Restoring Tavarekere</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue:  #1A3C5E;
+    --teal:  #2E7D6B;
+    --red:   #C0392B;
+    --lt:    #D0EAE3;
+    --lb:    #D6E4F0;
+    --mg:    #F5F5F2;
+    --dg:    #3A3A3A;
+    --acc:   #E8A020;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: #FAFAF8;
+    color: var(--dg);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  
+  /* --- PRINT OPTIMIZATION --- */
+  @media print {
+    body { background: white; }
+    .no-print { display: none !important; }
+    @page { size: A4; margin: 0; }
+    .page { page-break-after: avoid; box-shadow: none; margin: 0; }
+  }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            display: flex;
-            flex-direction: column;
-        }
+  /* --- ONE-PAGER STYLES --- */
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 20px auto;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 40px rgba(0,0,0,0.12);
+  }
+  .header {
+    background: var(--blue); color: white; padding: 28px 32px 24px; position: relative; overflow: hidden;
+  }
+  .header::before {
+    content: ''; position: absolute; top: -60px; right: -60px; width: 200px; height: 200px; border-radius: 50%; background: rgba(46,125,107,0.18);
+  }
+  .header::after {
+    content: ''; position: absolute; bottom: -40px; left: 80px; width: 140px; height: 140px; border-radius: 50%; background: rgba(46,125,107,0.1);
+  }
+  .header-inner { position: relative; z-index: 1; }
+  .tagline { font-size: 10px; letter-spacing: 2.5px; color: #7FC4B0; text-transform: uppercase; margin-bottom: 8px; font-weight: 600; }
+  .header h1 { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 700; line-height: 1.15; margin-bottom: 4px; }
+  .header-sub { font-size: 13px; color: #A8D5C8; margin-bottom: 18px; }
+  .stats { display: flex; gap: 28px; flex-wrap: wrap; }
+  .stat-v { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: #7FC4B0; display: block; }
+  .stat-l { font-size: 9px; text-transform: uppercase; letter-spacing: 1.5px; color: #A8D5C8; display: block; }
+  .main { flex: 1; display: grid; grid-template-columns: 58% 42%; }
+  .left { padding: 20px 20px 20px 28px; border-right: 1px solid #EEE; }
+  .right { padding: 20px 24px 20px 18px; background: var(--mg); }
+  .sec-title { font-size: 8.5px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--teal); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .sec-title::after { content: ''; flex: 1; height: 1px; background: var(--teal); opacity: 0.25; }
+  .problem-grid { display: grid; gap: 8px; margin-bottom: 16px; }
+  .prob { display: flex; gap: 10px; align-items: flex-start; padding: 10px 12px; border-radius: 6px; border-left: 3px solid var(--red); background: #FEF8F7; }
+  .prob-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .prob-title { font-weight: 700; color: var(--red); font-size: 12px; margin-bottom: 2px; }
+  .prob-text { font-size: 11px; color: #555; line-height: 1.45; }
+  .vision { background: var(--blue); color: white; border-radius: 8px; padding: 14px 16px; margin-bottom: 16px; }
+  .vision p { font-size: 12px; line-height: 1.6; color: #C8E0F0; }
+  .vision strong { color: white; }
+  .components { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 16px; }
+  .comp-tag { font-size: 10px; padding: 3px 9px; border-radius: 20px; font-weight: 600; border: 1px solid; }
+  .flow { margin-bottom: 14px; }
+  .flow-step-static { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; position: relative; }
+  .flow-step-static:not(:last-child)::before { content: ''; position: absolute; left: 14px; top: 28px; bottom: -6px; width: 1px; background: #DDD; }
+  .flow-num { width: 28px; height: 28px; border-radius: 50%; background: var(--blue); color: white; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; z-index: 1; }
+  .flow-content { padding-top: 4px; }
+  .flow-title { font-weight: 700; font-size: 11px; color: var(--blue); }
+  .flow-sub { font-size: 10px; color: #666; line-height: 1.4; }
+  .bsf-box { background: #FFF8E6; border: 1px solid var(--acc); border-radius: 8px; padding: 12px 14px; margin-bottom: 12px; }
+  .bsf-title { font-weight: 700; font-size: 11px; color: #B07A00; margin-bottom: 4px; }
+  .bsf-text { font-size: 10.5px; color: #666; line-height: 1.5; }
+  .deadline { display: inline-block; background: var(--red); color: white; font-size: 9px; font-weight: 700; padding: 2px 8px; border-radius: 20px; letter-spacing: 0.5px; margin-top: 5px; }
+  .partner { background: white; border-radius: 6px; padding: 10px 12px; margin-bottom: 8px; border-left: 3px solid var(--teal); }
+  .partner-name { font-weight: 700; font-size: 11px; color: var(--blue); }
+  .partner-role { font-size: 10px; color: #666; line-height: 1.4; margin-top: 2px; }
+  .involve { margin-bottom: 12px; }
+  .involve-item { display: flex; gap: 8px; align-items: flex-start; padding: 6px 0; border-bottom: 1px solid #E8E8E0; font-size: 10.5px; }
+  .involve-item:last-child { border-bottom: none; }
+  .involve-label { font-weight: 700; color: var(--blue); min-width: 80px; font-size: 10.5px; }
+  .involve-desc { color: #555; }
+  .footer { background: var(--blue); color: #A8D5C8; padding: 12px 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 14px; color: white; }
+  .footer-contact { font-size: 9.5px; line-height: 1.6; }
+  .footer-ref { font-size: 9px; color: #7FC4B0; text-align: right; }
+  .print-btn { position: fixed; top: 20px; right: 20px; background: var(--blue); color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 13px; font-family: inherit; box-shadow: 0 4px 16px rgba(0,0,0,0.2); z-index: 1000; }
 
-        /* --- SIDEBAR / NAVIGATION --- */
-        .sidebar {
-            background-color: var(--brand-navy);
-            color: white;
-            padding: 20px;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+  /* --- INTERACTIVE FLOWCHART STYLES --- */
+  .fc-container { font-family: 'Source Sans 3', sans-serif; background: #FAFAF8; border-top: 4px dashed #ccc; padding-top: 40px; margin-top: 40px;}
+  .fc-header { background: #1A3C5E; color: white; padding: 40px 32px 32px; position: relative; overflow: hidden; }
+  .fc-legend { background: white; border-bottom: 1px solid #E8E8E0; padding: 12px 32px; display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .fc-main { display: grid; grid-template-columns: 240px 1fr; min-height: calc(100vh - 200px); }
+  
+  .fc-rail { background: #F5F5F2; border-right: 1px solid #E8E8E0; padding: 24px 0; }
+  .fc-rail-item { display: flex; align-items: center; gap: 10px; padding: 10px 16px; cursor: pointer; border-left: 3px solid transparent; transition: all 0.2s; }
+  .fc-rail-item:hover { background: rgba(0,0,0,0.03); }
+  .fc-rail-num { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; transition: all 0.2s; }
+  
+  .fc-content { padding: 24px 32px; }
+  .fc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+  
+  .fc-card { border-radius: 8px; padding: 16px; cursor: pointer; background: white; transition: all 0.2s; position: relative; }
+  .fc-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+  
+  .fc-btn { border-radius: 6px; padding: 8px 18px; cursor: pointer; font-size: 12px; font-weight: 600; border: none; transition: 0.2s; }
+  .fc-btn-outline { background: #F5F5F2; border: 1px solid #DDD; color: #333; }
+  .fc-btn-outline:hover { background: #E8E8E0; }
+  .fc-btn-solid { background: #1A3C5E; color: white; }
+  .fc-btn-solid:hover { background: #112a44; }
 
-        .brand-logo {
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: white;
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .brand-logo span {
-            font-size: 0.8rem;
-            font-weight: 300;
-            color: var(--brand-teal);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 15px;
-            overflow-x: auto;
-            white-space: nowrap;
-            padding-bottom: 5px; /* For scrollbar breathing room */
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-size: 0.9rem;
-            padding: 5px 10px;
-            border-radius: 4px;
-            transition: background 0.3s;
-        }
-
-        .nav-links a:hover {
-            background-color: var(--brand-teal);
-        }
-
-        /* --- MAIN CONTENT --- */
-        .main-content {
-            padding: 30px 20px;
-            max-width: 900px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        section {
-            margin-bottom: 50px;
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-
-        h1, h2, h3 {
-            color: var(--brand-navy);
-            margin-bottom: 20px;
-        }
-
-        h2 { border-bottom: 2px solid var(--bg-light); padding-bottom: 10px; }
-
-        p { line-height: 1.6; margin-bottom: 15px; }
-
-        /* --- PLACEHOLDER PANELS --- */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .placeholder {
-            background-color: #e0e0e0;
-            border: 2px dashed #999;
-            height: 250px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
-            font-weight: 600;
-            color: #666;
-            text-align: center;
-            padding: 20px;
-        }
-
-        /* --- FLOWCHART --- */
-        .flow-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .flow-step {
-            background: var(--bg-light);
-            padding: 15px;
-            border-left: 5px solid var(--brand-navy);
-            border-radius: 4px;
-            font-weight: 600;
-        }
-
-        .flow-step.highlight {
-            background: #e8f5f1;
-            border-left: 5px solid var(--brand-teal);
-            color: var(--brand-teal);
-        }
-
-        /* --- ACCORDION --- */
-        .accordion {
-            background-color: var(--bg-light);
-            color: var(--brand-navy);
-            cursor: pointer;
-            padding: 18px;
-            width: 100%;
-            border: none;
-            text-align: left;
-            outline: none;
-            font-size: 1rem;
-            font-weight: 600;
-            transition: 0.4s;
-            border-radius: 4px;
-            margin-top: 10px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .accordion:after {
-            content: '\002B'; /* Plus sign */
-            font-weight: bold;
-            float: right;
-        }
-
-        .active:after {
-            content: "\2212"; /* Minus sign */
-        }
-
-        .accordion.active, .accordion:hover {
-            background-color: #e2e8f0;
-        }
-
-        .panel {
-            padding: 0 18px;
-            background-color: white;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            border-left: 2px solid var(--brand-navy);
-            margin-bottom: 10px;
-        }
-
-        .panel p { margin: 15px 0; font-size: 0.95rem; }
-
-        /* --- DASHBOARD & TABLES --- */
-        select {
-            width: 100%;
-            padding: 12px;
-            font-size: 1rem;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-family: inherit;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-
-        th, td {
-            text-align: left;
-            padding: 12px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: var(--brand-navy);
-            color: white;
-        }
-
-        tr:last-child { font-weight: 700; background-color: #e8f5f1; }
-
-        /* --- PROTOTYPE TRACKER --- */
-        .tracker-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .stat-box {
-            background: var(--bg-light);
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            border-top: 4px solid var(--brand-teal);
-        }
-
-        .stat-number {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--brand-navy);
-            display: block;
-        }
-
-        .stat-label { font-size: 0.85rem; color: #666; }
-
-        /* --- FORMS & BUTTONS --- */
-        .form-group { margin-bottom: 15px; }
-        label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 0.9rem;}
-        input[type="text"], textarea {
-            width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-family: inherit;
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: var(--brand-teal);
-            color: white;
-            padding: 12px 24px;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: 600;
-            text-align: center;
-            border: none;
-            cursor: pointer;
-            margin-top: 10px;
-            width: 100%;
-        }
-
-        .btn:hover { background-color: #236354; }
-
-        /* --- RESPONSIVE DESIGN --- */
-        @media (min-width: 768px) {
-            body { flex-direction: row; }
-            .sidebar {
-                width: 260px; height: 100vh; flex-direction: column; justify-content: flex-start; align-items: flex-start; position: fixed;
-            }
-            .nav-links { flex-direction: column; width: 100%; margin-top: 30px; overflow-x: visible; }
-            .main-content { margin-left: 260px; padding: 40px; }
-            .grid-2 { grid-template-columns: 1fr 1fr; }
-            .tracker-grid { grid-template-columns: repeat(4, 1fr); }
-            .btn { width: auto; }
-        }
-    </style>
+  @media (max-width: 768px) {
+    .main { grid-template-columns: 1fr; }
+    .left { border-right: none; border-bottom: 1px solid #EEE; }
+    .page { width: 100%; margin: 0; }
+    .fc-main { grid-template-columns: 1fr; }
+    .fc-rail { border-right: none; border-bottom: 1px solid #E8E8E0; display: flex; overflow-x: auto; padding: 10px; }
+    .fc-rail-item { flex: 0 0 auto; border-left: none; border-bottom: 3px solid transparent; flex-direction: column; text-align: center; }
+  }
+</style>
 </head>
 <body>
 
-    <nav class="sidebar">
-        <a href="#" class="brand-logo">
-            Project 083
-            <span>Greenscape Designz</span>
-        </a>
-        <div class="nav-links">
-            <a href="#overview">Overview</a>
-            <a href="#flow">Methodology</a>
-            <a href="#maps">Maps & Systems</a>
-            <a href="#dpr">DPR Components</a>
-            <a href="#costing">Cost Dashboard</a>
-            <a href="#prototype">Stage 9 Prototype</a>
-            <a href="#feedback">Public Survey</a>
+<button class="print-btn no-print" onclick="window.print()">🖨 Print / Save PDF</button>
+
+<div class="page">
+  <div class="header">
+    <div class="header-inner">
+      <div class="tagline">Project 083 · Tavarekere · SG Palya · Bhabani Nagar · Bengaluru</div>
+      <h1>Restoring Tavarekere —<br>A Living Corridor for All</h1>
+      <div class="header-sub">An 850-metre community-led revival of Bengaluru's park edge, lake, and water systems</div>
+      <div class="stats">
+        <div><span class="stat-v">850 m</span><span class="stat-l">Public Corridor</span></div>
+        <div><span class="stat-v">10</span><span class="stat-l">Interventions</span></div>
+        <div><span class="stat-v">64 Cr L</span><span class="stat-l">Stormwater Resolved</span></div>
+        <div><span class="stat-v">5 Years</span><span class="stat-l">Full Delivery</span></div>
+        <div><span class="stat-v">₹1–5 Cr</span><span class="stat-l">Phase 1 Budget</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="left">
+      <div class="sec-title">The Problems We Face Together</div>
+      <div class="problem-grid">
+        <div class="prob">
+          <div class="prob-icon">🚗</div>
+          <div>
+            <div class="prob-title">Derelict Cars Have Taken Our Streets</div>
+            <div class="prob-text">Garages dump abandoned vehicles on the park edge and neighbourhood roads — blocking footpaths, choking the drains, and turning public space into an informal junkyard.</div>
+          </div>
         </div>
-    </nav>
+        <div class="prob">
+          <div class="prob-icon">🌊</div>
+          <div>
+            <div class="prob-title">64 Crore Litres of Rain Lost Every Monsoon</div>
+            <div class="prob-text">Our rajakaluve and stormwater drains are blocked and concretised. Every year, 640 million litres of rainwater floods our streets instead of recharging our groundwater and replenishing the lake.</div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="prob-icon">🐟</div>
+          <div>
+            <div class="prob-title">Our Lake Is Dying</div>
+            <div class="prob-text">Sewage flows directly into the Tavarekere lake. Its edges are concrete. Biodiversity has collapsed. The water body that once fed the entire neighbourhood now threatens it.</div>
+          </div>
+        </div>
+      </div>
 
-    <main class="main-content">
+      <div class="sec-title">The Vision</div>
+      <div class="vision">
+        <p><strong>Project 083 transforms the 850-metre Tavarekere park edge</strong> into a continuous, shaded, nature-filled public corridor with safe walkways, a cycling track, skating zones, spaces for elderly and children — served by a rejuvenated lake, clean stormwater drains, and a living rajakaluve that recharges our groundwater and feeds our parks.</p>
+      </div>
+
+      <div class="sec-title">Ten Things We Will Build</div>
+      <div class="components" style="margin-bottom:16px;">
+        <span class="comp-tag" style="color:#1A3C5E;border-color:#1A3C5E;background:#EBF3FB;">🚶 Pedestrian Walkways</span>
+        <span class="comp-tag" style="color:#2E7D6B;border-color:#2E7D6B;background:#E8F5F1;">🚴 Cycling Track</span>
+        <span class="comp-tag" style="color:#2E7D6B;border-color:#2E7D6B;background:#E8F5F1;">🛼 Skating Zones</span>
+        <span class="comp-tag" style="color:#1A3C5E;border-color:#1A3C5E;background:#EBF3FB;">💧 Rajakaluve Rejuvenation</span>
+        <span class="comp-tag" style="color:#C0392B;border-color:#C0392B;background:#FDEDEB;">🌊 Aquifer Recharge</span>
+        <span class="comp-tag" style="color:#2E7D6B;border-color:#2E7D6B;background:#E8F5F1;">🌿 Park Fence Removed</span>
+        <span class="comp-tag" style="color:#1A3C5E;border-color:#1A3C5E;background:#EBF3FB;">👴 Elderly + Child Spaces</span>
+        <span class="comp-tag" style="color:#C0392B;border-color:#C0392B;background:#FDEDEB;">🏭 Sewage Diverted</span>
+        <span class="comp-tag" style="color:#1A3C5E;border-color:#1A3C5E;background:#EBF3FB;">🗑️ Solid Waste Managed</span>
+        <span class="comp-tag" style="color:#2E7D6B;border-color:#2E7D6B;background:#E8F5F1;">🐦 Lake Bioengineering</span>
+      </div>
+
+      <div class="sec-title">How It Happens — Step by Step</div>
+      <div class="flow">
+        <div class="flow-step-static"><div class="flow-num">1</div><div class="flow-content"><div class="flow-title">Inception &amp; Area Definition</div><div class="flow-sub">Map the 850m corridor, watershed, and lake system. Define the problem with data.</div></div></div>
+        <div class="flow-step-static"><div class="flow-num">2</div><div class="flow-content"><div class="flow-title">Technical Surveys (9 types)</div><div class="flow-sub">Topographic, hydrological, geological, biodiversity, lake water quality, sewage, vehicles, cycling RoW, utility mapping.</div></div></div>
+        <div class="flow-step-static"><div class="flow-num">3</div><div class="flow-content"><div class="flow-title">Research &amp; Case Studies</div><div class="flow-sub">Learn from K100 (Bengaluru), Seoul, Copenhagen, GCC Chennai. Apply what works here.</div></div></div>
+        <div class="flow-step-static"><div class="flow-num">4</div><div class="flow-content"><div class="flow-title">Analysis &amp; Stakeholder Deliberations</div><div class="flow-sub">Hydraulic water balance, ecological assessment, community workshops with residents, RWAs, schools, BBMP.</div></div></div>
+        <div class="flow-step-static"><div class="flow-num">5</div><div class="flow-content"><div class="flow-title">DPR Preparation</div><div class="flow-sub">Full engineering designs, bills of quantities, policy documents, and three-scenario budget validation.</div></div></div>
+        <div class="flow-step-static"><div class="flow-num">6</div><div class="flow-content"><div class="flow-title">Funding, Tenders &amp; Approvals</div><div class="flow-sub">BBMP/GBA approval, CSR sponsorships, BSF seed grant, procurement, contractor selection.</div></div></div>
+        <div class="flow-step-static"><div class="flow-num" style="background:#2E7D6B;">7</div><div class="flow-content"><div class="flow-title" style="color:#2E7D6B;">Phased Construction (Years 1–3)</div><div class="flow-sub">Phase 1: Park edge + cycling. Phase 2: Drains + STP. Phase 3: Lake bioengineering.</div></div></div>
+        <div class="flow-step-static"><div class="flow-num" style="background:#2E7D6B;">8</div><div class="flow-content"><div class="flow-title" style="color:#2E7D6B;">Monitoring, Handover &amp; City-Wide Replication</div><div class="flow-sub">Community stewardship, Tree Wardens, annual reports, and scaling the model to other Bengaluru park edges.</div></div></div>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="sec-title">Funding Pathways</div>
+      <div class="bsf-box">
+        <div class="bsf-title">🌱 Bengaluru Sustainability Forum (BSF) — Small Grants</div>
+        <div class="bsf-text">BSF offers up to ₹5 Lakhs for community-driven urban sustainability projects in Bengaluru — covering water, waste, mobility, and biodiversity. Project 083 is a strong fit. We are applying for seed funding for community surveys and stakeholder engagement in partnership with <strong>Sensing Local</strong> (Urban Living Lab, Bengaluru).</div>
+        <div class="deadline">⚠ Deadline: 4 May 2026</div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:12px;">
+        <div style="background:white;border-radius:6px;padding:10px;border-top:3px solid #1A3C5E;">
+          <div style="font-size:9px;text-transform:uppercase;letter-spacing:1px;color:#1A3C5E;font-weight:700;margin-bottom:4px;">BBMP Budget</div>
+          <div style="font-size:18px;font-weight:700;color:#1A3C5E;font-family:'Playfair Display',serif;">₹2,538 Cr</div>
+          <div style="font-size:9.5px;color:#666;">Allocated for parks, drains, lakes, and civil works in 2025-26</div>
+        </div>
+        <div style="background:white;border-radius:6px;padding:10px;border-top:3px solid #2E7D6B;">
+          <div style="font-size:9px;text-transform:uppercase;letter-spacing:1px;color:#2E7D6B;font-weight:700;margin-bottom:4px;">CSR Modules</div>
+          <div style="font-size:18px;font-weight:700;color:#2E7D6B;font-family:'Playfair Display',serif;">12 units</div>
+          <div style="font-size:9.5px;color:#666;">Each component sponsorable independently from ₹10L to ₹70L</div>
+        </div>
+      </div>
+
+      <div class="sec-title">Key Partners</div>
+      <div class="partner">
+        <div class="partner-name">Sensing Local</div>
+        <div class="partner-role">Bengaluru Urban Living Lab. Co-applicant for BSF grant. Community engagement, stakeholder facilitation, and citizen science surveys.</div>
+      </div>
+      <div class="partner">
+        <div class="partner-name">Greater Bengaluru Authority (GBA) + BBMP</div>
+        <div class="partner-role">Issuing authority for the DPR. Provides municipal budget allocation, approvals, and tender procurement.</div>
+      </div>
+      <div class="partner">
+        <div class="partner-name">Christ University SDG Cell</div>
+        <div class="partner-role">Citizen science, biodiversity monitoring, and community stewardship of bioswales and planted areas.</div>
+      </div>
+      <div class="partner" style="border-color:#C0392B;">
+        <div class="partner-name" style="color:#C0392B;">SG Palya, Bhabani Nagar &amp; Tavarekere RWAs</div>
+        <div class="partner-role">Community voice, local knowledge, and ongoing maintenance participation after handover.</div>
+      </div>
+
+      <div class="sec-title">How You Can Get Involved</div>
+      <div class="involve">
+        <div class="involve-item">
+          <div class="involve-label">🏠 Resident</div>
+          <div class="involve-desc">Join community workshops. Share your experience of flooding, parking, and the lake. Become a volunteer Tree Warden.</div>
+        </div>
+        <div class="involve-item">
+          <div class="involve-label">🏢 Business / CSR</div>
+          <div class="involve-desc">Sponsor a specific module — from the cycling track (₹30L) to the lake promenade (₹45L). Your brand on a public space that serves thousands daily.</div>
+        </div>
+        <div class="involve-item">
+          <div class="involve-label">🎓 Institution</div>
+          <div class="involve-desc">Partner on biodiversity surveys, hydrological research, or citizen science. Internships and field study opportunities available.</div>
+        </div>
+        <div class="involve-item">
+          <div class="involve-label">🏛️ Funder</div>
+          <div class="involve-desc">Contact us to discuss the BSF grant application, phased CSR partnership, or direct BBMP collaboration.</div>
+        </div>
+      </div>
+
+      <div style="background:var(--blue);border-radius:8px;padding:14px 16px;">
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#7FC4B0;font-weight:700;margin-bottom:8px;">About Greenscape Designz</div>
+        <div style="font-size:11px;color:#C8E0F0;line-height:1.6;">Led by <strong style="color:white;">Anirban Pal</strong>, Principal Landscape Architect and founder, with 20+ years of practice. Credentials from the School of Planning and Architecture, New Delhi. Based in SG Palya — we are your neighbours. Our role spans project initiation, all technical surveys, DPR authorship, construction supervision, and post-delivery monitoring.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div>
+      <div class="footer-logo">Greenscape Designz</div>
+      <div class="footer-contact">anirban.pal@greenscapedesignz.in<br>No. 3, Old No. 120, 2nd Floor, 10th Main, Venkateshwara Layout, SG Palya, Bengaluru — 560029</div>
+    </div>
+    <div class="footer-ref">
+      <div>Project 083 · GBA/BBMP/2025-26/083-DPR</div>
+      <div>bengalurusustainabilityforum.org</div>
+      <div>sensinglocal.in</div>
+    </div>
+  </div>
+</div>
+
+<div class="fc-container no-print" id="flowchart-root"></div>
+
+<script>
+// --- DATA STRUCTURE (From React Component) ---
+const stages = [
+  {
+    phase: "FOUNDATION", phaseColor: "#1A3C5E",
+    steps: [
+      {
+        num: "01", title: "Inception", subtitle: "Recognising the Problem", icon: "🌱",
+        what: "Community members, residents, and local advocates identify the degradation: derelict cars blocking streets, a dying lake, flooded roads every monsoon, children with nowhere safe to play.",
+        greenscape: "Greenscape Designz and Anirban Pal — based in SG Palya — initiated Project 083 as the neighbourhood's Principal Landscape Architect, bringing 20+ years of practice to bear on a problem at their own doorstep.",
+        outputs: ["Problem statement", "Stakeholder map", "Initial site photographs"],
+      },
+      {
+        num: "02", title: "Area of Study", subtitle: "Defining the Territory", icon: "🗺️",
+        what: "Map the 850-metre intervention zone (Bhabani Nagar to Tank Bund Road), the upstream watershed (Bannerghatta Road + Christ School Road), and the downstream lake system (Tavarekere → Madiwala → Bellandur-Varthur).",
+        greenscape: "GIS mapping, spatial boundary definition, sub-catchment delineation, and identification of the 64-crore-litre annual stormwater challenge across the full watershed.",
+        outputs: ["GIS boundary maps", "Watershed atlas", "Land-use analysis"],
+      },
+    ],
+  },
+  {
+    phase: "EVIDENCE", phaseColor: "#2E7D6B",
+    steps: [
+      {
+        num: "03", title: "Technical Surveys", subtitle: "Measuring What Exists", icon: "📐",
+        what: "Nine specialist surveys: LiDAR topographic survey, hydrological flow measurements, geology and soil testing, biodiversity baseline, lake bathymetric and water quality testing, sewage inflow survey, solid waste audit, vehicular census, and cycling right-of-way survey.",
+        greenscape: "Commissioning, coordinating, and quality-controlling all survey teams. Translating raw technical data into actionable design inputs across all ten project components.",
+        outputs: ["9 survey reports", "GIS data layers", "Water quality baseline"],
+      },
+      {
+        num: "04", title: "Research & Case Studies", subtitle: "Learning from the World", icon: "🔬",
+        what: "Study proven models: K100 Citizen's Waterway (Bengaluru), Sponge City (China), Seoul's Cheonggyecheon Stream restoration, Copenhagen's Climate Adaptation Plan, GCC Chennai stormwater standards, and Karnataka's own Rajakaluve Buffer Zone Rules 2025.",
+        greenscape: "Technical benchmarking — adapting global frameworks to the Tavarekere context. Policy research across URDPFI, NACTO, DULT, BBMP SOR 2024, Karnataka LDA, and NGT orders.",
+        outputs: ["Case study report", "Policy compliance matrix", "Applicable standards register"],
+      },
+      {
+        num: "05", title: "Analysis", subtitle: "Understanding the System", icon: "📊",
+        what: "Hydraulic water balance (validating the 64-crore-litre target), ecological carrying capacity, traffic flow modelling, CPTED safety audit, air quality and heat island assessment, and financial feasibility across four funding streams.",
+        greenscape: "Leading all technical analysis: HEC-HMS hydraulic modelling, ENVI-met climate modelling, GIS watershed analysis, cost-benefit studies, and phased budget allocation framework.",
+        outputs: ["Hydraulic water balance", "Climate model", "Phased cost plan"],
+      },
+    ],
+  },
+  {
+    phase: "COMMUNITY", phaseColor: "#C0392B",
+    steps: [
+      {
+        num: "06", title: "Stakeholder Deliberations", subtitle: "Listening to the Neighbourhood", icon: "🤝",
+        what: "Community workshops with SG Palya and Bhabani Nagar residents; RWA meetings; engagement with Christ School and Christ University SDG Cell; consultation with BBMP, GBA, DULT, BWSSB, and BESCOM; vendor and street-user inputs.",
+        greenscape: "Facilitating deliberations, presenting technical findings in accessible language, incorporating community feedback into design, and building the consensus needed for institutional approvals.",
+        outputs: ["Community priorities report", "Stakeholder consultation summary", "Design feedback integration"],
+      },
+    ],
+  },
+  {
+    phase: "DESIGN", phaseColor: "#1A3C5E",
+    steps: [
+      {
+        num: "07", title: "Scope Definition", subtitle: "Deciding What to Build", icon: "✏️",
+        what: "Finalise the ten project components (A–J) across four phases: pedestrian walkways, rajakaluve rejuvenation, cycling and skating, fence removal, inclusive public spaces, solid waste management, STP, lake bioengineering, watershed policy, and traffic improvement.",
+        greenscape: "Principal Landscape Architect role: technical scope definition, component prioritisation, phasing logic, and integration of all community feedback into a coherent, fundable programme.",
+        outputs: ["Component scope matrix", "Phased programme", "Budget allocation per phase"],
+      },
+      {
+        num: "08", title: "DPR Preparation", subtitle: "Engineering the Solution", icon: "📋",
+        what: "Prepare the full Detailed Project Report: engineering drawings, bills of quantities, hydraulic models, biodiversity plans, anti-exotic planting policy, stormwater property guidelines, STP specifications, lake bioengineering designs, and three-scenario budget validation.",
+        greenscape: "Lead author of the DPR across all ten components. Coordinating 12 specialist team members. Producing all BoQs per BBMP SOR 2024, all policy instruments, and the Budget Validation Mechanism for GBA/BBMP.",
+        outputs: ["Full DPR (10 components)", "BoQ per BBMP SOR", "Policy instruments (4 documents)", "Watershed atlas"],
+      },
+    ],
+  },
+  {
+    phase: "FUNDING", phaseColor: "#2E7D6B",
+    steps: [
+      {
+        num: "09", title: "Funding & Approvals", subtitle: "Securing the Resources", icon: "💰",
+        what: "Parallel funding mobilisation: BSF Small Grants (₹5L for Phase 0.5 surveys + community engagement); BBMP/GBA municipal budget allocations; CSR sponsorships for modular components; climate funds for lake and watershed works. GBA/BBMP/DULT/BWSSB institutional approvals.",
+        greenscape: "Technical specifications for each funding module. Preparation of CSR pitch decks. BSF grant application support (with Sensing Local as co-applicant). Institutional liaison for BBMP/GBA sign-off.",
+        outputs: ["Approved DPR", "Tender documents", "Funding secured per phase", "CSR agreements"],
+      },
+      {
+        num: "10", title: "Tendering", subtitle: "Selecting the Right Teams", icon: "📃",
+        what: "BBMP public procurement process: tender publication, pre-bid meetings, technical evaluation of contractor bids, and work order issuance — for each of the four phased packages.",
+        greenscape: "Technical specification compliance review. Pre-bid site visits. Evaluation committee support. Ensuring contractor understanding of ecological and design specifications.",
+        outputs: ["Work orders per phase", "Contractor agreements", "Construction programme"],
+      },
+    ],
+  },
+  {
+    phase: "EXECUTION", phaseColor: "#4A4A4A",
+    steps: [
+      {
+        num: "11", title: "Phased Construction", subtitle: "Building the Transformation", icon: "🏗️",
+        what: "Four construction phases over five years. Phase 1 (Year 1, ₹2–2.5Cr): Park edge pilot — walkways, cycling track, fence removal, rajakaluve primary reach. Phase 2 (Year 2): Neighbourhood drains + STP. Phase 3 (Year 3): Lake deconcretisation + bioengineering. Phase 4 (Years 4–5): Policy rollout + city-wide replication.",
+        greenscape: "Design supervision across all phases. Site quality control. Resolving design issues on-site. Monitoring ecological performance of planted bioswales and native hedgerows. Coordinating with BBMP inspectors and community representatives.",
+        outputs: ["Completed corridor (Year 1)", "Operational STP (Year 2)", "Bioengineered lake (Year 3)", "Policy adopted (Year 5)"],
+      },
+      {
+        num: "12", title: "Monitoring, Handover & Legacy", subtitle: "Sustaining the Change", icon: "🌿",
+        what: "Ongoing monitoring and evaluation: groundwater levels, Geovale lake health metric, biodiversity net gain tracking, pedestrian and cycling usage counts, air quality improvement. Community stewardship through Tree Wardens, vendor associations, RWA maintenance protocols, and the Christ University SDG Cell citizen science programme.",
+        greenscape: "Post-construction M&E framework design. Tree Warden programme deployment. Community onboarding and capacity-building workshops. Annual monitoring reports for GBA. Supporting replication of the Tavarekere model to adjacent park edges across Bengaluru.",
+        outputs: ["Annual M&E reports", "Geovale dashboard (public)", "Replication manual", "Policy adoption by BBMP/GBA"],
+      },
+    ],
+  },
+];
+
+const phaseColors = {
+  FOUNDATION: { bg: "#EBF3FB", border: "#1A3C5E", text: "#1A3C5E" },
+  EVIDENCE: { bg: "#E8F5F1", border: "#2E7D6B", text: "#2E7D6B" },
+  COMMUNITY: { bg: "#FDEDEB", border: "#C0392B", text: "#C0392B" },
+  DESIGN: { bg: "#EBF3FB", border: "#1A3C5E", text: "#1A3C5E" },
+  FUNDING: { bg: "#E8F5F1", border: "#2E7D6B", text: "#2E7D6B" },
+  EXECUTION: { bg: "#F5F5F5", border: "#4A4A4A", text: "#4A4A4A" },
+};
+
+// Flatten steps for easy indexing
+const allSteps = stages.flatMap((s) => s.steps.map((st) => ({ ...st, phase: s.phase, phaseColor: s.phaseColor })));
+
+// State
+let activeStep = null;
+
+// Render logic
+function renderFlowchart() {
+  const root = document.getElementById('flowchart-root');
+  
+  let html = `
+    <div class="fc-header">
+      <div style="position: absolute; top: 0; right: 0; width: 300px; height: 300px; background: rgba(46,125,107,0.15); border-radius: 50%; transform: translate(80px,-80px);"></div>
+      <div style="position: absolute; bottom: 0; left: 100px; width: 200px; height: 200px; background: rgba(46,125,107,0.1); border-radius: 50%; transform: translate(-50px,80px);"></div>
+      <div style="position: relative;">
+        <div style="font-size: 11px; letter-spacing: 3px; color: #7FC4B0; font-family: 'Source Sans 3', sans-serif; margin-bottom: 8px; text-transform: uppercase;">Interactive Master Plan · Explore the DPR Stages</div>
+        <h2 style="margin: 0 0 8px; font-size: 28px; font-weight: normal; line-height: 1.2; font-family: 'Playfair Display', serif;">Restoring Tavarekere</h2>
+        <div style="font-size: 16px; color: #A8D5C8; margin-bottom: 16px;">From Problem to Park Edge — The Complete Journey</div>
+      </div>
+    </div>
+
+    <div class="fc-legend">
+      <span style="font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-right: 8px;">Phases:</span>
+      ${stages.map(s => `
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <div style="width: 10px; height: 10px; border-radius: 2px; background: ${s.phaseColor}"></div>
+          <span style="font-size: 11px; color: ${s.phaseColor}; font-weight: bold; letter-spacing: 0.5px;">${s.phase}</span>
+        </div>
+      `).join('')}
+      <span style="font-size: 10px; color: #999; margin-left: auto;">Click any step for details</span>
+    </div>
+
+    <div class="fc-main">
+      <div class="fc-rail">
+        ${allSteps.map((step, i) => {
+          const isActive = activeStep === i;
+          const pc = phaseColors[step.phase];
+          return `
+            <div class="fc-rail-item" onclick="setActiveStep(${isActive ? 'null' : i})" 
+                 style="border-left-color: ${isActive ? step.phaseColor : 'transparent'}; background: ${isActive ? pc.bg : 'transparent'};">
+              <div class="fc-rail-num" style="background: ${isActive ? step.phaseColor : '#E0E0D8'}; color: ${isActive ? 'white' : '#888'};">
+                ${step.num}
+              </div>
+              <div style="text-align: left;">
+                <div style="font-size: 12px; font-weight: 700; color: ${isActive ? step.phaseColor : '#333'}; line-height: 1.2;">${step.title}</div>
+                <div style="font-size: 10px; color: #888;">${step.icon} ${step.phase}</div>
+              </div>
+            </div>
+          `;
+        }).join('')}
+      </div>
+
+      <div class="fc-content">
+  `;
+
+  if (activeStep === null) {
+    // Grid View
+    html += `<div>`;
+    stages.forEach((stage, si) => {
+      const pc = phaseColors[stage.phase];
+      html += `
+        <div style="margin-bottom: 32px;">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+            <div style="height: 2px; width: 40px; background: ${stage.phaseColor}"></div>
+            <div style="font-size: 11px; font-weight: 700; letter-spacing: 2px; color: ${stage.phaseColor}; text-transform: uppercase;">${stage.phase}</div>
+            <div style="height: 2px; flex: 1; background: ${stage.phaseColor}22;"></div>
+          </div>
+          <div class="fc-grid">
+            ${stage.steps.map((step, stepIdx) => {
+              const globalIdx = stages.slice(0,si).reduce((acc,s)=>acc+s.steps.length,0) + stepIdx;
+              return `
+                <div class="fc-card" onclick="setActiveStep(${globalIdx})" 
+                     style="border: 1px solid ${pc.border}33; border-left: 4px solid ${stage.phaseColor};"
+                     onmouseenter="this.style.background='${pc.bg}'" onmouseleave="this.style.background='white'">
+                  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                    <span style="font-size: 20px;">${step.icon}</span>
+                    <span style="font-size: 10px; color: ${stage.phaseColor}; font-weight: 700; letter-spacing: 1px;">${step.num}</span>
+                  </div>
+                  <div style="font-size: 15px; font-weight: 700; color: #1A1A1A; margin-bottom: 4px;">${step.title}</div>
+                  <div style="font-size: 12px; color: #666; line-height: 1.5; margin-bottom: 10px;">${step.subtitle}</div>
+                  <div style="font-size: 11px; color: #888;">${step.what.slice(0, 80)}… <span style="color: ${stage.phaseColor}; font-weight: 700;">Read more &rarr;</span></div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      `;
+    });
+    
+    // Greenscape Roles Box
+    html += `
+        <div style="background: #1A3C5E; color: white; border-radius: 8px; padding: 20px 24px; margin-top: 16px;">
+          <div style="font-size: 13px; font-weight: 700; margin-bottom: 8px; color: #7FC4B0;">Greenscape Designz · Role Across All Stages</div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr)); gap: 8px;">
+            ${[["Initiator","Community champion & project driver"],["Surveyor","Commissioning & quality-controlling all 9 surveys"],["Researcher","Technical benchmarking against 20+ standards"],["Facilitator","Stakeholder deliberations & community engagement"],["Author","Principal DPR author across 10 components"],["Supervisor","Construction oversight & quality control"],["Steward","Post-delivery M&E & replication support"]].map(([role,desc]) => `
+              <div style="background: rgba(255,255,255,0.08); border-radius: 6px; padding: 10px 12px;">
+                <div style="font-size: 11px; font-weight: 700; color: #7FC4B0; margin-bottom: 3px;">${role}</div>
+                <div style="font-size: 10px; color: #C8E6E0; line-height: 1.4;">${desc}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+    `;
+  } else {
+    // Detail View
+    const step = allSteps[activeStep];
+    const pc = phaseColors[step.phase];
+    html += `
+      <div>
+        <button class="fc-btn fc-btn-outline" onclick="setActiveStep(null)" style="margin-bottom: 24px;">&larr; Back to all steps</button>
         
-        <section id="overview">
-            <h1>Urban & Riparian Revival</h1>
-            <p>An 850m corridor transformation leveraging blue-green infrastructure to integrate sustainable mobility, ecological restoration, and community resilience in Tavarekere.</p>
-            <div class="grid-2">
-                <div class="placeholder" style="border-color: #ff6b6b; background: #ffebeb;">
-                    [Image Placeholder]<br>Before: Derelict vehicles & blocked drains on Tank Bund Road
-                </div>
-                <div class="placeholder" style="border-color: var(--brand-teal); background: #e8f5f1;">
-                    [Image Placeholder]<br>After: Proposed Pedestrian NMT Infrastructure & SuDS
-                </div>
-            </div>
-        </section>
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
+          <div style="width: 60px; height: 60px; border-radius: 50%; background: ${step.phaseColor}; display: flex; align-items: center; justify-content: center; font-size: 28px;">${step.icon}</div>
+          <div>
+            <div style="font-size: 11px; color: ${step.phaseColor}; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px;">${step.phase} · Step ${step.num}</div>
+            <h2 style="margin: 0; font-size: 26px; color: #1A1A1A; line-height: 1.1; font-family: 'Playfair Display', serif;">${step.title}</h2>
+            <div style="font-size: 15px; color: #666; margin-top: 5px;">${step.subtitle}</div>
+          </div>
+        </div>
 
-        <section id="flow">
-            <h2>Project Methodology</h2>
-            <div class="flow-container">
-                <div class="flow-step">1. Project Inception & Scoping</div>
-                <div class="flow-step">2. Topographical & Hydrological Surveys</div>
-                <div class="flow-step">3. Stakeholder Research & Pain-point Mapping</div>
-                <div class="flow-step">4. Spatial & Ecological Analysis</div>
-                <div class="flow-step">5. Draft Detailed Project Report (DPR)</div>
-                <div class="flow-step">6. Multi-Agency Approvals (BBMP, BWSSB)</div>
-                <div class="flow-step">7. Phased Construction Rollout</div>
-                <div class="flow-step">8. O&M and Ecological Monitoring</div>
-                <div class="flow-step highlight">9. TIER-1 PROTOTYPE (Tactical Urbanism Pilot)</div>
-            </div>
-        </section>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-bottom: 20px;">
+          <div style="background: ${pc.bg}; border: 1px solid ${pc.border}44; border-radius: 8px; padding: 18px 20px;">
+            <div style="font-size: 11px; font-weight: 700; color: ${step.phaseColor}; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px;">What Happens</div>
+            <div style="font-size: 14px; color: #333; line-height: 1.7;">${step.what}</div>
+          </div>
+          <div style="background: #1A3C5E; border-radius: 8px; padding: 18px 20px;">
+            <div style="font-size: 11px; font-weight: 700; color: #7FC4B0; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px;">Greenscape Designz's Role</div>
+            <div style="font-size: 14px; color: #E8F4F0; line-height: 1.7;">${step.greenscape}</div>
+          </div>
+        </div>
 
-        <section id="maps">
-            <h2>Maps & Spatial Systems</h2>
-            <p>Interactive spatial planning targeting the Tavarekere watershed boundaries and street network. <em>(Note: Interactive Leaflet.js map integration planned for Phase 2).</em></p>
-            <div class="grid-2">
-                <div class="placeholder">
-                    [Map Placeholder]<br>850m Corridor Route Map
-                </div>
-                <div class="placeholder">
-                    [Map Placeholder]<br>Micro-Watershed Catchment Area
-                </div>
-            </div>
-        </section>
+        <div style="background: white; border: 1px solid #E8E8E0; border-radius: 8px; padding: 16px 20px;">
+          <div style="font-size: 11px; font-weight: 700; color: #666; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px;">Key Outputs at This Stage</div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            ${step.outputs.map(o => `
+              <span style="background: ${pc.bg}; color: ${step.phaseColor}; font-size: 12px; padding: 4px 12px; border-radius: 20px; border: 1px solid ${pc.border}33;">${o}</span>
+            `).join('')}
+          </div>
+        </div>
 
-        <section id="dpr">
-            <h2>DPR Components (v4)</h2>
-            <p>Expand to view the detailed scope of work for each project component.</p>
-            
-            <button class="accordion">Component A: Abandoned Vehicle Management</button>
-            <div class="panel"><p>GIS mapping and systematic removal strategy for street de-cluttering.</p></div>
+        <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+          ${activeStep > 0 ? `<button class="fc-btn fc-btn-outline" onclick="setActiveStep(${activeStep-1})">&larr; ${allSteps[activeStep-1].title}</button>` : `<div></div>`}
+          ${activeStep < allSteps.length-1 ? `<button class="fc-btn fc-btn-solid" onclick="setActiveStep(${activeStep+1})">${allSteps[activeStep+1].title} &rarr;</button>` : `<div></div>`}
+        </div>
+      </div>
+    `;
+  }
 
-            <button class="accordion">Component B: Pedestrian & NMT Infrastructure</button>
-            <div class="panel"><p>Development of 3.5m continuous pedestrian walkways and Non-Motorized Transport lanes.</p></div>
+  html += `</div></div>`; // Close fc-content and fc-main
+  
+  // Footer
+  html += `
+    <div style="background: #1A3C5E; color: #A8D5C8; padding: 16px 32px; font-size: 11px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+      <span>Greenscape Designz · anirban.pal@greenscapedesignz.in · SG Palya, Bengaluru 560029</span>
+      <span>Project 083 · GBA/BBMP/2025-26/083-DPR · Version 4.0</span>
+    </div>
+  `;
 
-            <button class="accordion">Component C: Rajakaluve Hydrology & SuDS</button>
-            <div class="panel"><p>Integration of Sustainable Drainage Systems (SuDS) and groundwater recharge mechanisms along the stormwater drain.</p></div>
+  root.innerHTML = html;
+}
 
-            <button class="accordion">Component D: Solid Waste Management</button>
-            <div class="panel"><p>Strategic placement of bins and enforcement of litter control protocols.</p></div>
+// Attach to window so onclick handlers can find it
+window.setActiveStep = function(idx) {
+  activeStep = idx;
+  renderFlowchart();
+  // Scroll to flowchart top on mobile when stepping
+  if(window.innerWidth <= 768 && idx !== null) {
+    document.getElementById('flowchart-root').scrollIntoView({behavior: 'smooth', block: 'start'});
+  }
+};
 
-            <button class="accordion">Component E: Biodiversity Corridors (VANA)</button>
-            <div class="panel"><p>Native planting and layered habitat creation to support local bird and insect ecology.</p></div>
+// Initial Render
+renderFlowchart();
+</script>
 
-            <button class="accordion">Component F: Smart Lighting & Safety</button>
-            <div class="panel"><p>Implementation of CPTED (Crime Prevention Through Environmental Design) principles with solar LED installations.</p></div>
-
-            <button class="accordion">Component G: Watershed Policy & Scaling</button>
-            <div class="panel"><p>Budget validation and policy frameworks for extending the corridor interventions across the wider watershed.</p></div>
-
-            <button class="accordion">Component H: Community Engagement</button>
-            <div class="panel"><p>Public realm design utilizing the GDHI (Greenscape Designz Happiness Index) to measure spatial comfort and emotion.</p></div>
-
-            <button class="accordion">Component I: Digital Twin / GIS Monitoring</button>
-            <div class="panel"><p>Digital integration for real-time tracking of ecological and structural performance.</p></div>
-
-            <button class="accordion">Component J: Operations & Maintenance (O&M)</button>
-            <div class="panel"><p>Long-term framework for up-keep, funding models, and community stewardship.</p></div>
-        </section>
-
-        <section id="rfp">
-            <h2>RFP Structure Summary</h2>
-            <button class="accordion">1. Introduction & Context</button>
-            <div class="panel"><p>Project background, current challenges in Tavarekere, and primary ecological objectives.</p></div>
-            <button class="accordion">2. Detailed Scope</button>
-            <div class="panel"><p>Extensive breakdown of Components A through J and expected deliverables.</p></div>
-            <button class="accordion">3. Statutory & Policy Framework</button>
-            <div class="panel"><p>Compliance guidelines referencing BBMP, URDPFI guidelines, and NGT norms.</p></div>
-        </section>
-
-        <section id="costing">
-            <h2>Cost Validation Dashboard</h2>
-            <p>Select a budget scenario to view the estimated component breakdown based on RFP guidelines.</p>
-            <select id="scenario-select">
-                <option value="baseline">Baseline Intervention (Approx. ₹1 Cr)</option>
-                <option value="optimised">Optimised Integration (Approx. ₹3 Cr)</option>
-                <option value="enhanced">Enhanced Ecosystem (Approx. ₹5 Cr)</option>
-            </select>
-
-            <div style="overflow-x:auto;">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Major Sub-Heads</th>
-                            <th>Estimated Allocation</th>
-                        </tr>
-                    </thead>
-                    <tbody id="cost-table-body">
-                        </tbody>
-                </table>
-            </div>
-        </section>
-
-        <section id="prototype">
-            <h2>Stage 9: The Prototype</h2>
-            <p>Before executing the full 850m corridor, we will construct a <strong>50m physical pilot</strong> to validate community adoption, test SuDS performance, and refine construction methodologies.</p>
-            
-            <h3 style="margin-top: 30px; font-size: 1.1rem;">Prototype Impact Tracker (Target Metrics)</h3>
-            <div class="tracker-grid">
-                <div class="stat-box">
-                    <span class="stat-number">50m</span>
-                    <span class="stat-label">Tactical Walkway</span>
-                </div>
-                <div class="stat-box">
-                    <span class="stat-number">120</span>
-                    <span class="stat-label">Sqm Permeable Surface</span>
-                </div>
-                <div class="stat-box">
-                    <span class="stat-number">45</span>
-                    <span class="stat-label">Native Saplings</span>
-                </div>
-                <div class="stat-box">
-                    <span class="stat-number">5k</span>
-                    <span class="stat-label">Liters SuDS Capacity</span>
-                </div>
-            </div>
-        </section>
-
-        <section id="feedback">
-            <h2>Stakeholder Consultation</h2>
-            <p>Community input is vital to the GDHI framework. Review the sample questions below or access the full official survey.</p>
-            
-            <div style="background: var(--bg-light); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                <div class="form-group">
-                    <label>1. How often do you currently walk along Tank Bund Road?</label>
-                    <select style="margin-bottom: 0;">
-                        <option>Daily</option>
-                        <option>Weekly</option>
-                        <option>Rarely (Due to safety/infrastructure)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>2. What is your primary concern regarding the current corridor?</label>
-                    <input type="text" placeholder="e.g., Traffic, lack of footpaths, flooding..." disabled>
-                </div>
-                <p style="font-size: 0.85rem; color: #666; margin-top: 10px;">*This is a preview. To submit responses, use the official form below.</p>
-            </div>
-
-            <a href="https://forms.google.com/your-placeholder-link-here" target="_blank" class="btn">Open Full Survey Form</a>
-        </section>
-
-    </main>
-
-    <script>
-        // --- ACCORDION LOGIC ---
-        const accordions = document.querySelectorAll(".accordion");
-        accordions.forEach(acc => {
-            acc.addEventListener("click", function() {
-                this.classList.toggle("active");
-                const panel = this.nextElementSibling;
-                if (panel.style.maxHeight) {
-                    panel.style.maxHeight = null;
-                } else {
-                    panel.style.maxHeight = panel.scrollHeight + "px";
-                }
-            });
-        });
-
-        // --- COST DASHBOARD LOGIC ---
-        const scenarioData = {
-            baseline: [
-                { component: "Civil & NMT Walkways", cost: "₹40 Lakhs" },
-                { component: "Basic Drainage Clearance", cost: "₹30 Lakhs" },
-                { component: "Landscape & VANA Planting", cost: "₹20 Lakhs" },
-                { component: "Lighting & Misc", cost: "₹10 Lakhs" },
-                { component: "Total Estimated Value", cost: "₹1.00 Cr" }
-            ],
-            optimised: [
-                { component: "Enhanced NMT Walkways", cost: "₹1.20 Cr" },
-                { component: "SuDS & Hydrology Network", cost: "₹80 Lakhs" },
-                { component: "Advanced VANA Ecosystem", cost: "₹60 Lakhs" },
-                { component: "Smart Tech & CPTED Lighting", cost: "₹40 Lakhs" },
-                { component: "Total Estimated Value", cost: "₹3.00 Cr" }
-            ],
-            enhanced: [
-                { component: "Premium NMT & Public Spaces", cost: "₹1.50 Cr" },
-                { component: "Lake Integration & Deep SuDS", cost: "₹2.00 Cr" },
-                { component: "Full VANA & Biodiversity Net", cost: "₹1.00 Cr" },
-                { component: "Smart Grid & Policy Admin", cost: "₹50 Lakhs" },
-                { component: "Total Estimated Value", cost: "₹5.00 Cr" }
-            ]
-        };
-
-        const scenarioSelect = document.getElementById('scenario-select');
-        const tableBody = document.getElementById('cost-table-body');
-
-        function updateTable() {
-            const selected = scenarioSelect.value;
-            const data = scenarioData[selected];
-            
-            tableBody.innerHTML = ''; // Clear current rows
-            
-            data.forEach(item => {
-                const row = document.createElement('tr');
-                row.innerHTML = `<td>${item.component}</td><td>${item.cost}</td>`;
-                tableBody.appendChild(row);
-            });
-        }
-
-        // Initialize table on load
-        scenarioSelect.addEventListener('change', updateTable);
-        updateTable();
-    </script>
 </body>
 </html>
