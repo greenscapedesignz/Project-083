@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 083 — Urban & Riparian Revival</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-navy: #1A3C5E;
+            --brand-teal: #2E7D6B;
+            --bg-light: #f4f7f6;
+            --text-dark: #333;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- SIDEBAR / NAVIGATION --- */
+        .sidebar {
+            background-color: var(--brand-navy);
+            color: white;
+            padding: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .brand-logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .brand-logo span {
+            font-size: 0.8rem;
+            font-weight: 300;
+            color: var(--brand-teal);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding-bottom: 5px; /* For scrollbar breathing room */
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        .nav-links a:hover {
+            background-color: var(--brand-teal);
+        }
+
+        /* --- MAIN CONTENT --- */
+        .main-content {
+            padding: 30px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        section {
+            margin-bottom: 50px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        h1, h2, h3 {
+            color: var(--brand-navy);
+            margin-bottom: 20px;
+        }
+
+        h2 { border-bottom: 2px solid var(--bg-light); padding-bottom: 10px; }
+
+        p { line-height: 1.6; margin-bottom: 15px; }
+
+        /* --- PLACEHOLDER PANELS --- */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .placeholder {
+            background-color: #e0e0e0;
+            border: 2px dashed #999;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-weight: 600;
+            color: #666;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* --- FLOWCHART --- */
+        .flow-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .flow-step {
+            background: var(--bg-light);
+            padding: 15px;
+            border-left: 5px solid var(--brand-navy);
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .flow-step.highlight {
+            background: #e8f5f1;
+            border-left: 5px solid var(--brand-teal);
+            color: var(--brand-teal);
+        }
+
+        /* --- ACCORDION --- */
+        .accordion {
+            background-color: var(--bg-light);
+            color: var(--brand-navy);
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: 0.4s;
+            border-radius: 4px;
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .accordion:after {
+            content: '\002B'; /* Plus sign */
+            font-weight: bold;
+            float: right;
+        }
+
+        .active:after {
+            content: "\2212"; /* Minus sign */
+        }
+
+        .accordion.active, .accordion:hover {
+            background-color: #e2e8f0;
+        }
+
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            border-left: 2px solid var(--brand-navy);
+            margin-bottom: 10px;
+        }
+
+        .panel p { margin: 15px 0; font-size: 0.95rem; }
+
+        /* --- DASHBOARD & TABLES --- */
+        select {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: var(--brand-navy);
+            color: white;
+        }
+
+        tr:last-child { font-weight: 700; background-color: #e8f5f1; }
+
+        /* --- PROTOTYPE TRACKER --- */
+        .tracker-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-box {
+            background: var(--bg-light);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border-top: 4px solid var(--brand-teal);
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--brand-navy);
+            display: block;
+        }
+
+        .stat-label { font-size: 0.85rem; color: #666; }
+
+        /* --- FORMS & BUTTONS --- */
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 0.9rem;}
+        input[type="text"], textarea {
+            width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-family: inherit;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--brand-teal);
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .btn:hover { background-color: #236354; }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (min-width: 768px) {
+            body { flex-direction: row; }
+            .sidebar {
+                width: 260px; height: 100vh; flex-direction: column; justify-content: flex-start; align-items: flex-start; position: fixed;
+            }
+            .nav-links { flex-direction: column; width: 100%; margin-top: 30px; overflow-x: visible; }
+            .main-content { margin-left: 260px; padding: 40px; }
+            .grid-2 { grid-template-columns: 1fr 1fr; }
+            .tracker-grid { grid-template-columns: repeat(4, 1fr); }
+            .btn { width: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="sidebar">
+        <a href="#" class="brand-logo">
+            Project 083
+            <span>Greenscape Designz</span>
+        </a>
+        <div class="nav-links">
+            <a href="#overview">Overview</a>
+            <a href="#flow">Methodology</a>
+            <a href="#maps">Maps & Systems</a>
+            <a href="#dpr">DPR Components</a>
+            <a href="#costing">Cost Dashboard</a>
+            <a href="#prototype">Stage 9 Prototype</a>
+            <a href="#feedback">Public Survey</a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        
+        <section id="overview">
+            <h1>Urban & Riparian Revival</h1>
+            <p>An 850m corridor transformation leveraging blue-green infrastructure to integrate sustainable mobility, ecological restoration, and community resilience in Tavarekere.</p>
+            <div class="grid-2">
+                <div class="placeholder" style="border-color: #ff6b6b; background: #ffebeb;">
+                    [Image Placeholder]<br>Before: Derelict vehicles & blocked drains on Tank Bund Road
+                </div>
+                <div class="placeholder" style="border-color: var(--brand-teal); background: #e8f5f1;">
+                    [Image Placeholder]<br>After: Proposed Pedestrian NMT Infrastructure & SuDS
+                </div>
+            </div>
+        </section>
+
+        <section id="flow">
+            <h2>Project Methodology</h2>
+            <div class="flow-container">
+                <div class="flow-step">1. Project Inception & Scoping</div>
+                <div class="flow-step">2. Topographical & Hydrological Surveys</div>
+                <div class="flow-step">3. Stakeholder Research & Pain-point Mapping</div>
+                <div class="flow-step">4. Spatial & Ecological Analysis</div>
+                <div class="flow-step">5. Draft Detailed Project Report (DPR)</div>
+                <div class="flow-step">6. Multi-Agency Approvals (BBMP, BWSSB)</div>
+                <div class="flow-step">7. Phased Construction Rollout</div>
+                <div class="flow-step">8. O&M and Ecological Monitoring</div>
+                <div class="flow-step highlight">9. TIER-1 PROTOTYPE (Tactical Urbanism Pilot)</div>
+            </div>
+        </section>
+
+        <section id="maps">
+            <h2>Maps & Spatial Systems</h2>
+            <p>Interactive spatial planning targeting the Tavarekere watershed boundaries and street network. <em>(Note: Interactive Leaflet.js map integration planned for Phase 2).</em></p>
+            <div class="grid-2">
+                <div class="placeholder">
+                    [Map Placeholder]<br>850m Corridor Route Map
+                </div>
+                <div class="placeholder">
+                    [Map Placeholder]<br>Micro-Watershed Catchment Area
+                </div>
+            </div>
+        </section>
+
+        <section id="dpr">
+            <h2>DPR Components (v4)</h2>
+            <p>Expand to view the detailed scope of work for each project component.</p>
+            
+            <button class="accordion">Component A: Abandoned Vehicle Management</button>
+            <div class="panel"><p>GIS mapping and systematic removal strategy for street de-cluttering.</p></div>
+
+            <button class="accordion">Component B: Pedestrian & NMT Infrastructure</button>
+            <div class="panel"><p>Development of 3.5m continuous pedestrian walkways and Non-Motorized Transport lanes.</p></div>
+
+            <button class="accordion">Component C: Rajakaluve Hydrology & SuDS</button>
+            <div class="panel"><p>Integration of Sustainable Drainage Systems (SuDS) and groundwater recharge mechanisms along the stormwater drain.</p></div>
+
+            <button class="accordion">Component D: Solid Waste Management</button>
+            <div class="panel"><p>Strategic placement of bins and enforcement of litter control protocols.</p></div>
+
+            <button class="accordion">Component E: Biodiversity Corridors (VANA)</button>
+            <div class="panel"><p>Native planting and layered habitat creation to support local bird and insect ecology.</p></div>
+
+            <button class="accordion">Component F: Smart Lighting & Safety</button>
+            <div class="panel"><p>Implementation of CPTED (Crime Prevention Through Environmental Design) principles with solar LED installations.</p></div>
+
+            <button class="accordion">Component G: Watershed Policy & Scaling</button>
+            <div class="panel"><p>Budget validation and policy frameworks for extending the corridor interventions across the wider watershed.</p></div>
+
+            <button class="accordion">Component H: Community Engagement</button>
+            <div class="panel"><p>Public realm design utilizing the GDHI (Greenscape Designz Happiness Index) to measure spatial comfort and emotion.</p></div>
+
+            <button class="accordion">Component I: Digital Twin / GIS Monitoring</button>
+            <div class="panel"><p>Digital integration for real-time tracking of ecological and structural performance.</p></div>
+
+            <button class="accordion">Component J: Operations & Maintenance (O&M)</button>
+            <div class="panel"><p>Long-term framework for up-keep, funding models, and community stewardship.</p></div>
+        </section>
+
+        <section id="rfp">
+            <h2>RFP Structure Summary</h2>
+            <button class="accordion">1. Introduction & Context</button>
+            <div class="panel"><p>Project background, current challenges in Tavarekere, and primary ecological objectives.</p></div>
+            <button class="accordion">2. Detailed Scope</button>
+            <div class="panel"><p>Extensive breakdown of Components A through J and expected deliverables.</p></div>
+            <button class="accordion">3. Statutory & Policy Framework</button>
+            <div class="panel"><p>Compliance guidelines referencing BBMP, URDPFI guidelines, and NGT norms.</p></div>
+        </section>
+
+        <section id="costing">
+            <h2>Cost Validation Dashboard</h2>
+            <p>Select a budget scenario to view the estimated component breakdown based on RFP guidelines.</p>
+            <select id="scenario-select">
+                <option value="baseline">Baseline Intervention (Approx. ₹1 Cr)</option>
+                <option value="optimised">Optimised Integration (Approx. ₹3 Cr)</option>
+                <option value="enhanced">Enhanced Ecosystem (Approx. ₹5 Cr)</option>
+            </select>
+
+            <div style="overflow-x:auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Major Sub-Heads</th>
+                            <th>Estimated Allocation</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cost-table-body">
+                        </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="prototype">
+            <h2>Stage 9: The Prototype</h2>
+            <p>Before executing the full 850m corridor, we will construct a <strong>50m physical pilot</strong> to validate community adoption, test SuDS performance, and refine construction methodologies.</p>
+            
+            <h3 style="margin-top: 30px; font-size: 1.1rem;">Prototype Impact Tracker (Target Metrics)</h3>
+            <div class="tracker-grid">
+                <div class="stat-box">
+                    <span class="stat-number">50m</span>
+                    <span class="stat-label">Tactical Walkway</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">120</span>
+                    <span class="stat-label">Sqm Permeable Surface</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">45</span>
+                    <span class="stat-label">Native Saplings</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">5k</span>
+                    <span class="stat-label">Liters SuDS Capacity</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="feedback">
+            <h2>Stakeholder Consultation</h2>
+            <p>Community input is vital to the GDHI framework. Review the sample questions below or access the full official survey.</p>
+            
+            <div style="background: var(--bg-light); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                <div class="form-group">
+                    <label>1. How often do you currently walk along Tank Bund Road?</label>
+                    <select style="margin-bottom: 0;">
+                        <option>Daily</option>
+                        <option>Weekly</option>
+                        <option>Rarely (Due to safety/infrastructure)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>2. What is your primary concern regarding the current corridor?</label>
+                    <input type="text" placeholder="e.g., Traffic, lack of footpaths, flooding..." disabled>
+                </div>
+                <p style="font-size: 0.85rem; color: #666; margin-top: 10px;">*This is a preview. To submit responses, use the official form below.</p>
+            </div>
+
+            <a href="https://forms.google.com/your-placeholder-link-here" target="_blank" class="btn">Open Full Survey Form</a>
+        </section>
+
+    </main>
+
+    <script>
+        // --- ACCORDION LOGIC ---
+        const accordions = document.querySelectorAll(".accordion");
+        accordions.forEach(acc => {
+            acc.addEventListener("click", function() {
+                this.classList.toggle("active");
+                const panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        });
+
+        // --- COST DASHBOARD LOGIC ---
+        const scenarioData = {
+            baseline: [
+                { component: "Civil & NMT Walkways", cost: "₹40 Lakhs" },
+                { component: "Basic Drainage Clearance", cost: "₹30 Lakhs" },
+                { component: "Landscape & VANA Planting", cost: "₹20 Lakhs" },
+                { component: "Lighting & Misc", cost: "₹10 Lakhs" },
+                { component: "Total Estimated Value", cost: "₹1.00 Cr" }
+            ],
+            optimised: [
+                { component: "Enhanced NMT Walkways", cost: "₹1.20 Cr" },
+                { component: "SuDS & Hydrology Network", cost: "₹80 Lakhs" },
+                { component: "Advanced VANA Ecosystem", cost: "₹60 Lakhs" },
+                { component: "Smart Tech & CPTED Lighting", cost: "₹40 Lakhs" },
+                { component: "Total Estimated Value", cost: "₹3.00 Cr" }
+            ],
+            enhanced: [
+                { component: "Premium NMT & Public Spaces", cost: "₹1.50 Cr" },
+                { component: "Lake Integration & Deep SuDS", cost: "₹2.00 Cr" },
+                { component: "Full VANA & Biodiversity Net", cost: "₹1.00 Cr" },
+                { component: "Smart Grid & Policy Admin", cost: "₹50 Lakhs" },
+                { component: "Total Estimated Value", cost: "₹5.00 Cr" }
+            ]
+        };
+
+        const scenarioSelect = document.getElementById('scenario-select');
+        const tableBody = document.getElementById('cost-table-body');
+
+        function updateTable() {
+            const selected = scenarioSelect.value;
+            const data = scenarioData[selected];
+            
+            tableBody.innerHTML = ''; // Clear current rows
+            
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${item.component}</td><td>${item.cost}</td>`;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Initialize table on load
+        scenarioSelect.addEventListener('change', updateTable);
+        updateTable();
+    </script>
+</body>
+</html>
