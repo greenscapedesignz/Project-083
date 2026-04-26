@@ -435,6 +435,637 @@ p.sec-lead{font-size:16px;color:#555;line-height:1.7;max-width:680px;margin-bott
 .partner-name{font-weight:600;font-size:14px;color:var(--navy);margin-bottom:4px}
 .partner-role{font-size:12px;color:#666;line-height:1.5}
 
+/* ═══════════════════════════════════════════════
+   BSF APPLICATION SECTION
+═══════════════════════════════════════════════ */
+.bsf-box{
+  background:linear-gradient(135deg,#FFF8E6,#FFFBF2);
+  border:2px solid #E8C45A;border-radius:var(--r);
+  padding:28px;margin-top:24px;
+}
+.bsf-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:16px;flex-wrap:wrap}
+.bsf-badge{
+  background:var(--amber);color:white;font-size:10px;font-weight:700;
+  letter-spacing:0.08em;text-transform:uppercase;padding:4px 12px;
+  border-radius:20px;white-space:nowrap;margin-top:4px;
+}
+.bsf-title{font-family:var(--fw-serif);font-size:22px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.bsf-sub{font-size:13px;color:#666}
+.bsf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:16px}
+.bsf-cell{background:white;border-radius:8px;padding:14px;box-shadow:0 1px 6px rgba(0,0,0,0.06)}
+.bsf-cell-label{font-size:9px;text-transform:uppercase;letter-spacing:0.1em;color:var(--teal);font-weight:700;margin-bottom:4px}
+.bsf-cell-val{font-size:14px;font-weight:500;color:var(--navy)}
+
+/* ═══════════════════════════════════════════════
+   TEAM
+═══════════════════════════════════════════════ */
+.team-card{
+  background:var(--navy);color:white;border-radius:var(--r);
+  padding:32px;margin-top:24px;display:grid;
+  grid-template-columns:1fr 1fr;gap:24px;
+}
+.team-left{}
+.team-name{font-family:var(--fw-serif);font-size:28px;font-weight:700;margin-bottom:4px}
+.team-role{font-size:13px;color:rgba(255,255,255,0.6);margin-bottom:16px}
+.team-desc{font-size:13px;color:rgba(255,255,255,0.75);line-height:1.7;margin-bottom:16px}
+.team-credentials{display:flex;flex-direction:column;gap:6px}
+.team-cred{font-size:11px;color:rgba(255,255,255,0.5);padding-left:12px;position:relative}
+.team-cred::before{content:'·';position:absolute;left:0;color:var(--teal)}
+.team-right{border-left:1px solid rgba(255,255,255,0.1);padding-left:24px}
+.team-right-title{font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.4);margin-bottom:14px}
+.team-role-grid{display:flex;flex-direction:column;gap:6px}
+.team-role-item{font-size:11px;color:rgba(255,255,255,0.65);padding:6px 10px;background:rgba(255,255,255,0.06);border-radius:4px}
+
+/* ═══════════════════════════════════════════════
+   CONTACT / CTA
+═══════════════════════════════════════════════ */
+.cta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:24px}
+.cta-card{background:white;border-radius:var(--r);padding:20px;border-top:3px solid var(--teal);box-shadow:0 2px 12px rgba(0,0,0,0.06);text-align:center}
+.cta-emoji{font-size:28px;margin-bottom:8px}
+.cta-type{font-weight:700;font-size:13px;color:var(--navy);margin-bottom:4px}
+.cta-action{font-size:11px;color:#666;line-height:1.5}
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+footer{
+  background:var(--navy);color:rgba(255,255,255,0.5);
+  padding:32px 48px;display:flex;
+  justify-content:space-between;align-items:flex-start;
+  flex-wrap:wrap;gap:20px;
+}
+.footer-logo-text{font-family:var(--fw-serif);font-size:16px;color:white;margin-bottom:4px}
+.footer-links a{color:rgba(255,255,255,0.4);font-size:11px;text-decoration:none;margin-right:14px;transition:color var(--trans)}
+.footer-links a:hover{color:white}
+.footer-right{text-align:right;font-size:10px;line-height:1.8}
+
+/* ═══════════════════════════════════════════════
+   UTILITIES
+═══════════════════════════════════════════════ */
+.divider{height:1px;background:var(--mist);margin:24px 0}
+.badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border-radius:4px}
+.badge-new{background:#E8F5E9;color:#2E7D32}
+.badge-up{background:#FFF8E1;color:#B07A00}
+.badge-key{background:var(--navy-lt);color:var(--navy)}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════ */
+@media(max-width:900px){
+  :root{--sidebar:0px}
+  .hamburger{display:flex}
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0)}
+  .overlay.open{display:block}
+  .main{margin-left:0}
+  section{padding:48px 20px}
+  .hero-inner{padding:64px 20px 40px}
+  .hero-stats{flex-direction:column}
+  .stat-cell{border-right:none;border-bottom:1px solid rgba(255,255,255,0.12)}
+  .acc-grid{grid-template-columns:1fr}
+  .team-card{grid-template-columns:1fr}
+  .team-right{border-left:none;padding-left:0;border-top:1px solid rgba(255,255,255,0.1);padding-top:20px}
+  footer{flex-direction:column}
+  .footer-right{text-align:left}
+}
+@media(max-width:600px){
+  h1.hero-title{font-size:28px}
+  h2.sec-title{font-size:22px}
+  .problem-grid,.funding-grid,.bsf-grid,.proto-grid{grid-template-columns:1fr}
+}
+
+
+/* ── KANNADA TRANSLATION ── */
+.kn {
+  display: block;
+  font-family: 'Noto Sans Kannada', sans-serif;
+  font-size: 0.78em;
+  color: #999;
+  margin-top: 3px;
+  line-height: 1.5;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+.kn-wh {
+  display: block;
+  font-family: 'Noto Sans Kannada', sans-serif;
+  font-size: 0.76em;
+  color: rgba(255,255,255,0.45);
+  margin-top: 3px;
+  line-height: 1.45;
+  font-weight: 300;
+}
+.kn-teal {
+  display: block;
+  font-family: 'Noto Sans Kannada', sans-serif;
+  font-size: 0.76em;
+  color: #7FC4B0;
+  margin-top: 3px;
+  line-height: 1.45;
+}
+.kn-sm {
+  display: block;
+  font-family: 'Noto Sans Kannada', sans-serif;
+  font-size: 0.72em;
+  color: #aaa;
+  margin-top: 2px;
+  line-height: 1.4;
+}
+
+/* Scroll active highlight */
+.main-nav-link{}
+</style>
+</head>
+<body>
+
+<!-- HAMBURGER -->
+<button class="hamburger" id="hamburger" aria-label="Menu">
+  <span></span><span></span><span></span>
+</button>
+<div class="overlay" id="overlay"></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-mark">
+      <div class="logo-sq">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C8 2 4 5.5 4 10c0 5.5 8 12 8 12s8-6.5 8-12c0-4.5-4-8-8-8zm0 10.5c-1.4 0-2.5-1.1-2.5-2.5S10.6 7.5 12 7.5 14.5 8.6 14.5 10 13.4 12.5 12 12.5z"/>
+        </svg>
+      </div>
+      <div>
+        <div class="logo-text-main">Greenscape Designz</div>
+        <div class="logo-text-sub">Landscape Architecture</div>
+      </div>
+    </div>
+  </div>
+  <div class="sidebar-project">
+    <div class="project-badge">GBA / BBMP / 2025-26</div>
+    <div class="project-name">Project 083</div>
+    <div class="project-sub">Riparian Revival: Tavarekere</div>
+  </div>
+  <nav>
+    <div class="nav-section-label">Overview</div>
+    <a href="#hero" class="active"><span class="nav-icon">🏠</span>Introduction<span class="kn-sm">ಪರಿಚಯ</span></a>
+    <a href="#problems"><span class="nav-icon">⚠️</span>The Problem<span class="kn-sm">ಸಮಸ್ಯೆ</span></a>
+    <a href="#vision"><span class="nav-icon">🌿</span>Vision<span class="kn-sm">ದೂರದೃಷ್ಟಿ</span></a>
+    <div class="nav-section-label">Framework</div>
+    <a href="#flow"><span class="nav-icon">🔄</span>Project Journey<span class="kn-sm">ಯೋಜನಾ ಪ್ರಯಾಣ</span></a>
+    <a href="#prototype"><span class="nav-icon">🧪</span>Prototype Stage<span class="kn-sm">ಮಾದರಿ ಹಂತ</span></a>
+    <a href="#map"><span class="nav-icon">🗺️</span>Study Area<span class="kn-sm">ಅಧ್ಯಯನ ಪ್ರದೇಶ</span></a>
+    <div class="nav-section-label">Technical</div>
+    <a href="#dpr"><span class="nav-icon">📋</span>DPR Components<span class="kn-sm">ಡಿಪಿಆರ್ ಘಟಕಗಳು</span></a>
+    <a href="#cost"><span class="nav-icon">💰</span>Cost Dashboard<span class="kn-sm">ವೆಚ್ಚ ಸಾರಾಂಶ</span></a>
+    <a href="#funding"><span class="nav-icon">🏦</span>Funding<span class="kn-sm">ಹಣಕಾಸು</span></a>
+    <div class="nav-section-label">Community</div>
+    <a href="#questionnaire"><span class="nav-icon">📝</span>Survey<span class="kn-sm">ಸಮೀಕ್ಷೆ</span></a>
+    <a href="#partners"><span class="nav-icon">🤝</span>Partners<span class="kn-sm">ಪಾಲುದಾರರು</span></a>
+    <a href="#team"><span class="nav-icon">👤</span>Team<span class="kn-sm">ತಂಡ</span></a>
+    <a href="#contact"><span class="nav-icon">📬</span>Get Involved<span class="kn-sm">ಭಾಗವಹಿಸಿ</span></a>
+  </nav>
+  <div class="sidebar-footer">
+    <div>anirban.pal@greenscapedesignz.in</div>
+    <div>SG Palya, Bengaluru 560029</div>
+    <div style="margin-top:6px;color:rgba(255,255,255,0.25)">Version 4.0 · April 2025</div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+<!-- ─── HERO ─────────────────────────────────────────── -->
+<section id="hero" style="padding:0">
+  <div style="position:relative;overflow:hidden;background:var(--navy)">
+    <div class="hero-bg-circle"></div>
+    <div class="hero-bg-circle"></div>
+    <div class="hero-inner">
+      <div class="hero-badge">
+        <div class="hero-badge-dot"></div>
+        <span>GBA/BBMP/2025-26/083-DPR · Tavarekere, SG Palya, Bhabani Nagar · Bengaluru</span><span class="kn-teal">ಜಿಬಿಎ/ಬಿಬಿಎಂಪಿ · ತಾವರೆಕೆರೆ, ಎಸ್.ಜಿ. ಪಾಳ್ಯ, ಭವಾನಿ ನಗರ · ಬೆಂಗಳೂರು</span>
+      </div>
+      <h1 class="hero-title">Restoring Tavarekere —<br>A Living Corridor for All<br><span class="kn-wh" style="font-size:0.62em;margin-top:8px">ತಾವರೆಕೆರೆ ಪುನಃಸ್ಥಾಪನೆ — ಎಲ್ಲರಿಗಾಗಿ ಒಂದು ಜೀವಂತ ಕಾರಿಡಾರ್</span></h1>
+      <p class="hero-subtitle">An 850-metre community-led riparian and public realm revival integrating rajakaluve rejuvenation, lake bioengineering, cycling, walkways, aquifer recharge, and city-wide policy.<span class="kn-wh">೮೫೦ ಮೀಟರ್ ಸಮುದಾಯ ನೇತೃತ್ವದ ನದಿತೀರ ಮತ್ತು ಸಾರ್ವಜನಿಕ ಕ್ಷೇತ್ರ ಪುನರುಜ್ಜೀವನ — ರಾಜಕಾಲುವೆ ಪುನರ್ಜೀವ, ಕೆರೆ ಜೈವಿಕ ಎಂಜಿನಿಯರಿಂಗ್, ಸೈಕ್ಲಿಂಗ್, ನಡಿಗೆ ಮಾರ್ಗ, ಅಂತರ್ಜಲ ಮರುಪೂರಣ ಮತ್ತು ನಗರ-ವ್ಯಾಪಿ ನೀತಿ.</span></p>
+      <div class="hero-stats">
+        <div class="stat-cell"><span class="stat-val">850 m</span><span class="stat-lbl">Corridor Length<span class="kn-wh" style="font-size:0.85em">ಕಾರಿಡಾರ್ ಉದ್ದ</span></span></div>
+        <div class="stat-cell"><span class="stat-val">10</span><span class="stat-lbl">Components<span class="kn-wh" style="font-size:0.85em">ಘಟಕಗಳು</span></span></div>
+        <div class="stat-cell"><span class="stat-val">64 Cr L</span><span class="stat-lbl">Stormwater Target<span class="kn-wh" style="font-size:0.85em">ಮಳೆನೀರಿನ ಗುರಿ</span></span></div>
+        <div class="stat-cell"><span class="stat-val">5 Yrs</span><span class="stat-lbl">Full Delivery<span class="kn-wh" style="font-size:0.85em">ಸಂಪೂರ್ಣ ಅನುಷ್ಠಾನ</span></span></div>
+        <div class="stat-cell"><span class="stat-val">₹1–5 Cr</span><span class="stat-lbl">Phase 1 Budget<span class="kn-wh" style="font-size:0.85em">ಹಂತ ೧ ಬಜೆಟ್</span></span></div>
+      </div>
+    </div>
+    <div class="hero-images">
+      <div class="img-placeholder ip-before">
+        <div class="ip-icon">🚗</div>
+        <div><strong style="color:rgba(255,255,255,0.8)">BEFORE</strong> <span style="color:rgba(255,255,255,0.4);font-size:11px">/ ಮೊದಲು</span></div>
+        <div>Derelict vehicles blocking Tank Bund Road;<br>concretised rajakaluve; opaque fortress walls<br><span class="kn-wh" style="font-size:0.85em">ಪಾಳು ವಾಹನಗಳು, ಕಾಂಕ್ರೀಟ್ ರಾಜಕಾಲುವೆ, ಕೋಟೆಯಂತಹ ಗೋಡೆ</span></div>
+      </div>
+      <div class="img-placeholder ip-after">
+        <div class="ip-icon">🌿</div>
+        <div><strong style="color:rgba(255,255,255,0.8)">AFTER</strong> <span style="color:rgba(255,255,255,0.4);font-size:11px">/ ನಂತರ</span></div>
+        <div>Native hedgerows, cycling tracks, bioswales;<br>open lake edge; children's sensory gardens<br><span class="kn-wh" style="font-size:0.85em">ಸ್ಥಳೀಯ ಸಸ್ಯಗಳು, ಸೈಕ್ಲಿಂಗ್ ಟ್ರ್ಯಾಕ್, ಜೈವಿಕ ಕಾಲುವೆ, ತೆರೆದ ಕೆರೆ ಅಂಚು</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROBLEMS ─────────────────────────────────────── -->
+<section id="problems">
+  <div class="sec-eyebrow">Why This Project Matters <span class="kn" style="display:inline;font-size:0.8em;color:var(--teal)">/ ಈ ಯೋಜನೆ ಏಕೆ ಮುಖ್ಯ</span></div>
+  <h2 class="sec-title">The Problems We Face Together<span class="kn">ನಾವು ಒಟ್ಟಾಗಿ ಎದುರಿಸುವ ಸಮಸ್ಯೆಗಳು</span></h2>
+  <p class="sec-lead">Every monsoon, every school run, every morning walk — these are the failures our neighbourhood experiences. Project 083 addresses each of them, together.</p>
+  <div class="problem-grid">
+    <div class="prob-card">
+      <span class="prob-icon">🚗</span>
+      <div class="prob-title">Streets Captured by Derelict Cars<span class="kn" style="color:#c0392b">ಪಾಳು ವಾಹನಗಳಿಂದ ಆಕ್ರಮಿಸಲ್ಪಟ್ಟ ರಸ್ತೆಗಳು</span></div>
+      <div class="prob-text">Commercial garages dump abandoned vehicles on public right-of-way — blocking footpaths, choking stormwater drains, and turning shared streets into private junkyards. The park edge and neighbourhood roads alike are affected.</div>
+    </div>
+    <div class="prob-card">
+      <span class="prob-icon">🌊</span>
+      <div class="prob-title">64 Crore Litres of Rain Lost Every Monsoon<span class="kn" style="color:#c0392b">ಪ್ರತಿ ಮಳೆಗಾಲದಲ್ಲಿ ೬೪ ಕೋಟಿ ಲೀಟರ್ ಮಳೆನೀರು ವ್ಯರ್ಥ</span></div>
+      <div class="prob-text">The rajakaluve is concretised and disconnected from the natural catchment. Every year, 640 million litres of rainwater floods our streets, businesses, and homes instead of recharging groundwater and replenishing the lake — because the system is broken.</div>
+    </div>
+    <div class="prob-card">
+      <span class="prob-icon">🐟</span>
+      <div class="prob-title">The Tavarekere Lake Is Dying<span class="kn" style="color:#c0392b">ತಾವರೆಕೆರೆ ಕೆರೆ ನಾಶವಾಗುತ್ತಿದೆ</span></div>
+      <div class="prob-text">Raw sewage flows directly into the lake. Concrete walls prevent natural bank exchange. Aquatic biodiversity has collapsed. The water body that historically supported the neighbourhood ecosystem now threatens public health.</div>
+    </div>
+    <div class="prob-card">
+      <span class="prob-icon">🚶</span>
+      <div class="prob-title">No Safe Space to Walk, Cycle, or Rest<span class="kn" style="color:#c0392b">ನಡೆಯಲು, ಸೈಕಲ್ ಹೊಡೆಯಲು ಅಥವಾ ವಿಶ್ರಮಿಸಲು ಸುರಕ್ಷಿತ ಜಾಗವಿಲ್ಲ</span></div>
+      <div class="prob-text">Footpaths are occupied by vehicles, broken, or non-existent. There is no cycling infrastructure. Elderly residents and children have no safe, shaded public space. The park's high walls ensure it benefits no one passing by.</div>
+    </div>
+    <div class="prob-card">
+      <span class="prob-icon">🗑️</span>
+      <div class="prob-title">Solid Waste Has No System<span class="kn" style="color:#c0392b">ಘನ ತ್ಯಾಜ್ಯಕ್ಕೆ ಯಾವುದೇ ವ್ಯವಸ್ಥೆ ಇಲ್ಲ</span></div>
+      <div class="prob-text">Chronic dumping hotspots line the rajakaluve banks and lake edge. Without structured waste segregation and collection, every intervention is undermined — bioswales clog, drains block, and the public realm degrades within months of any improvement.</div>
+    </div>
+    <div class="prob-card">
+      <span class="prob-icon">🌿</span>
+      <div class="prob-title">Exotic Plants Replace Native Ecology<span class="kn" style="color:#c0392b">ವಿದೇಶಿ ಸಸ್ಯಗಳು ಸ್ಥಳೀಯ ಪರಿಸರವನ್ನು ನಾಶಮಾಡುತ್ತಿವೆ</span></div>
+      <div class="prob-text">BBMP horticulture routinely plants invasive and ecologically inappropriate exotic species — Gulmohar, Rain Tree, Bougainvillea, Lantana — in parks and medians, displacing native flora and reducing the corridor's capacity to support biodiversity and aquifer recharge.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── VISION ────────────────────────────────────────── -->
+<section id="vision">
+  <div class="sec-eyebrow">The Transformation <span class="kn" style="display:inline;font-size:0.8em">/ ರೂಪಾಂತರ</span></div>
+  <h2 class="sec-title">What We Are Building<span class="kn">ನಾವು ಏನನ್ನು ನಿರ್ಮಿಸುತ್ತಿದ್ದೇವೆ</span></h2>
+  <div class="vision-box">
+    <div class="vision-text">
+      Project 083 transforms <em>850 metres of degraded Tavarekere park edge</em> — from Bhabani Nagar in the north to 1st Main Tank Bund Road in the south — into a <em>continuous, shaded, ecology-first public corridor</em> with safe walkways, a dedicated cycling track, skating zones, spaces for elderly citizens and children, a rejuvenated rajakaluve that recharges our groundwater, a living lake with bioengineered edges and floating wetlands, and <em>city-wide policies</em> that prevent this from ever happening again.
+    <div class="kn-wh" style="margin-top:14px;font-size:14px;line-height:1.6">ಯೋಜನೆ ೦೮೩ ತಾವರೆಕೆರೆ ಉದ್ಯಾನದ ಅಂಚನ್ನು ಒಂದು ನಿರಂತರ, ನೆರಳಿನ, ಪ್ರಕೃತಿ-ಪ್ರಧಾನ ಸಾರ್ವಜನಿಕ ಕಾರಿಡಾರ್ ಆಗಿ ಪರಿವರ್ತಿಸುತ್ತದೆ — ಸುರಕ್ಷಿತ ನಡಿಗೆ ಮಾರ್ಗ, ಸೈಕ್ಲಿಂಗ್ ಟ್ರ್ಯಾಕ್, ಸ್ಕೇಟಿಂಗ್ ವಲಯ, ಹಿರಿಯ ನಾಗರಿಕರು ಮತ್ತು ಮಕ್ಕಳಿಗೆ ಜಾಗ, ಪುನಶ್ಚೇತನ ಪಡೆದ ರಾಜಕಾಲುವೆ, ಜೈವಿಕ ಎಂಜಿನಿಯರಿಂಗ್ ಅಂಚಿನ ಕೆರೆ, ಮತ್ತು ನಗರ-ವ್ಯಾಪಿ ನೀತಿಗಳು.</div>
+    </div>
+  </div>
+  <div style="margin-top:20px;display:flex;flex-wrap:wrap;gap:8px">
+    <span style="font-size:11px;background:var(--navy-lt);color:var(--navy);padding:4px 12px;border-radius:20px;font-weight:600">🚶 Pedestrian Walkways</span>
+    <span style="font-size:11px;background:var(--teal-lt);color:var(--teal);padding:4px 12px;border-radius:20px;font-weight:600">🚴 Cycling Track</span>
+    <span style="font-size:11px;background:var(--teal-lt);color:var(--teal);padding:4px 12px;border-radius:20px;font-weight:600">🛼 Skating Zones</span>
+    <span style="font-size:11px;background:var(--navy-lt);color:var(--navy);padding:4px 12px;border-radius:20px;font-weight:600">💧 Rajakaluve Rejuvenation</span>
+    <span style="font-size:11px;background:#FEF3E0;color:var(--amber);padding:4px 12px;border-radius:20px;font-weight:600">🌊 64Cr L Aquifer Recharge</span>
+    <span style="font-size:11px;background:var(--teal-lt);color:var(--teal);padding:4px 12px;border-radius:20px;font-weight:600">🌿 Park Fence Removed</span>
+    <span style="font-size:11px;background:var(--navy-lt);color:var(--navy);padding:4px 12px;border-radius:20px;font-weight:600">👴 Elderly + Children's Spaces</span>
+    <span style="font-size:11px;background:#FDEDEB;color:var(--red);padding:4px 12px;border-radius:20px;font-weight:600">🏭 Sewage Diverted</span>
+    <span style="font-size:11px;background:var(--navy-lt);color:var(--navy);padding:4px 12px;border-radius:20px;font-weight:600">🗑️ Solid Waste Managed</span>
+    <span style="font-size:11px;background:var(--teal-lt);color:var(--teal);padding:4px 12px;border-radius:20px;font-weight:600">🐦 Lake Bioengineering</span>
+  </div>
+</section>
+
+<!-- ─── FLOW ───────────────────────────────────────────── -->
+<section id="flow">
+  <div class="sec-eyebrow">Cradle to Completion <span class="kn" style="display:inline;font-size:0.8em">/ ಪ್ರಾರಂಭದಿಂದ ಸಂಪೂರ್ಣಗೊಳ್ಳುವವರೆಗೆ</span></div>
+  <h2 class="sec-title">The Project Journey<span class="kn">ಯೋಜನೆಯ ಪ್ರಯಾಣ</span></h2>
+  <p class="sec-lead">Fourteen stages across three tiers — from the first community conversation to a city-wide policy legacy. Select a tier to explore each stage in detail.</p>
+
+  <div class="tier-tabs">
+    <button class="tier-tab active" data-tier="1">Tier 1 — The Spine (Stages 1–9)<span class="kn-sm">ಸ್ತಂಭ (ಹಂತಗಳು ೧–೯)</span></button>
+    <button class="tier-tab" data-tier="2">Tier 2 — Parallel Outputs from DPR<span class="kn-sm">ಡಿಪಿಆರ್‌ನಿಂದ ಸಮಾನಾಂತರ ಉತ್ಪಾದನೆ</span></button>
+    <button class="tier-tab" data-tier="3">Tier 3 — The Living System<span class="kn-sm">ಜೀವಂತ ವ್ಯವಸ್ಥೆ</span></button>
+  </div>
+
+  <!-- TIER 1 -->
+  <div class="tier-panel active" id="tier-1">
+    <div class="stage-list">
+
+      <!-- S1 -->
+      <div class="stage-item">
+        <div class="stage-num-col"><div class="stage-num">01</div><div class="stage-line"></div></div>
+        <div class="stage-body">
+          <div class="stage-card">
+            <div class="stage-title">Inception and Mobilisation<span class="kn">ಚಾಲನೆ ಮತ್ತು ಸಂಘಟನೆ</span> <span class="badge badge-key" style="font-size:9px;vertical-align:middle;margin-left:6px">Initiated</span></div>
+            <div class="stage-subtitle">Community recognition of systemic failure + team and funding assembly<span class="kn-sm">ವ್ಯವಸ್ಥಿತ ವಿಫಲತೆಯ ಸಮುದಾಯ ಗುರುತಿಸುವಿಕೆ + ತಂಡ ಮತ್ತು ಹಣಕಾಸು ಜೋಡಣೆ</span></div>
+            <div class="stage-desc">Community members, local advocates, and Greenscape Designz identify the full extent of degradation — derelict vehicles, dying lake, annual flooding, no safe pedestrian or cycling infrastructure. Project 083 is formally initiated. Funding strategy established: BSF Small Grant (₹5L seed), BBMP budget allocation, CSR modules. A community steering group is formed.</div>
+            <div class="stage-tags">
+              <span class="stage-tag tag-prof">Principal Landscape Architect</span>
+              <span class="stage-tag tag-prof">Urban Planner</span>
+              <span class="stage-tag tag-prof">Community Facilitator</span>
+            </div>
+            <div class="stage-outputs">
+              <span class="output-pill">Problem statement</span>
+              <span class="output-pill">Stakeholder map</span>
+              <span class="output-pill">Funding strategy</span>
+              <span class="output-pill">Steering group formed</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S2 -->
+      <div class="stage-item">
+        <div class="stage-num-col"><div class="stage-num">02</div><div class="stage-line"></div></div>
+        <div class="stage-body">
+          <div class="stage-card">
+            <div class="stage-title">Area of Study Definition<span class="kn">ಅಧ್ಯಯನ ಪ್ರದೇಶದ ವ್ಯಾಖ್ಯೆ</span></div>
+            <div class="stage-subtitle">GIS-based watershed delineation — from ridge to lake<span class="kn-sm">ಜಿಐಎಸ್ ಆಧಾರಿತ ಜಲಾನಯನ ವ್ಯಾಖ್ಯೆ — ಬೆಟ್ಟದಿಂದ ಕೆರೆಯವರೆಗೆ</span></div>
+            <div class="stage-desc">Map three nested zones: (1) Primary intervention — 850 m park edge, Bhabani Nagar to Tank Bund Road, N+S edges only (west blocked). (2) Secondary catchment — 500 m neighbourhood radius for vehicle abatement and stormwater drain upgrading. (3) Full watershed — Bannerghatta Road → Christ School Road → Tavarekere → Madiwala → Bellandur-Varthur series. The 64-crore-litre annual stormwater challenge is quantified at this stage.</div>
+            <div class="stage-tags">
+              <span class="stage-tag tag-prof">GIS Specialist</span>
+              <span class="stage-tag tag-prof">Hydrologist — Mr. Rajasekhar</span>
+              <span class="stage-tag tag-prof">Landscape Architect</span>
+            </div>
+            <div class="stage-outputs">
+              <span class="output-pill">GIS boundary maps</span>
+              <span class="output-pill">Watershed atlas (draft)</span>
+              <span class="output-pill">Stormwater volume quantification</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S3 -->
+      <div class="stage-item">
+        <div class="stage-num-col"><div class="stage-num">03</div><div class="stage-line"></div></div>
+        <div class="stage-body">
+          <div class="stage-card">
+            <div class="stage-title">Data Collection — Three Parallel Tracks<span class="kn">ಮಾಹಿತಿ ಸಂಗ್ರಹ — ಮೂರು ಸಮಾನಾಂತರ ಮಾರ್ಗಗಳು</span></div>
+            <div class="stage-subtitle">Social survey + technical surveys + policy research — simultaneously<span class="kn-sm">ಸಾಮಾಜಿಕ ಸಮೀಕ್ಷೆ + ತಾಂತ್ರಿಕ ಸಮೀಕ್ಷೆ + ನೀತಿ ಸಂಶೋಧನೆ — ಏಕಕಾಲದಲ್ಲಿ</span></div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:12px 0">
+              <div style="background:rgba(21,101,192,0.07);border-left:3px solid #1565C0;border-radius:6px;padding:12px">
+                <div style="font-size:10px;font-weight:700;color:#1565C0;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px">Track A — Social Survey</div>
+                <div style="font-size:12px;color:#444;line-height:1.5">Door-to-door questionnaire across all watershed residents: apartments, PGs, shops, businesses, institutions. Focus groups. Photographic documentation of lived experience.</div>
+              </div>
+              <div style="background:rgba(46,125,59,0.07);border-left:3px solid #2E7D32;border-radius:6px;padding:12px">
+                <div style="font-size:10px;font-weight:700;color:#2E7D32;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px">Track B — Technical (9 Surveys)</div>
+                <div style="font-size:12px;color:#444;line-height:1.5">LiDAR topographic · Hydrological flows · Hydrogeological · Geology/soil (IS 1893) · Biodiversity (BNHS/IUCN) · Lake bathymetric + water quality · Sewage inflow · Solid waste audit · Vehicle census + cycling RoW</div>
+              </div>
+              <div style="background:rgba(106,27,154,0.07);border-left:3px solid #6A1B9A;border-radius:6px;padding:12px">
+                <div style="font-size:10px;font-weight:700;color:#6A1B9A;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px">Track C — Desk Research</div>
+                <div style="font-size:12px;color:#444;line-height:1.5">K100 Bengaluru · Sponge City China · Seoul Cheonggyecheon · Copenhagen · GCC Chennai · URDPFI · NACTO · DULT · Karnataka LDA · Geovale Metric · NGT orders</div>
+              </div>
+            </div>
+            <div class="stage-tags">
+              <span class="stage-tag tag-prof">Social Researcher</span>
+              <span class="stage-tag tag-prof">Hydrologist</span>
+              <span class="stage-tag tag-prof">Ecologist</span>
+              <span class="stage-tag tag-prof">Geotechnical Expert</span>
+              <span class="stage-tag tag-prof">Environmental Engineer</span>
+              <span class="stage-tag tag-prof">Transport Planner</span>
+            </div>
+            <div class="stage-outputs">
+              <span class="output-pill">Survey questionnaire data</span>
+              <span class="output-pill">9 technical survey reports</span>
+              <span class="output-pill">Case study report</span>
+              <span class="output-pill">Policy compliance matrix</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S4 -->
+      <div class="stage-item">
+        <div class="stage-num-col"><div class="stage-num">04</div><div class="stage-line"></div></div>
+        <div class="stage-body">
+          <div class="stage-card">
+            <div class="stage-title">Data Processing and Integration<span class="kn">ಮಾಹಿತಿ ಸಂಸ್ಕರಣೆ ಮತ್ತು ಏಕೀಕರಣ</span></div>
+            <div class="stage-subtitle">All three tracks consolidated into a single GIS platform<span class="kn-sm">ಎಲ್ಲಾ ಮೂರು ಮಾರ್ಗಗಳನ್ನು ಒಂದೇ ಜಿಐಎಸ್ ವೇದಿಕೆಯಲ್ಲಿ ಸಂಯೋಜಿಸಲಾಗಿದೆ</span></div>
+            <div class="stage-desc">Raw survey data is cleaned, cross-referenced, and structured into thematic GIS layers: water, ecology, mobility, waste, social, structural, geology. Community questionnaire responses are tabulated and priority-ranked. The hydraulic water balance for the 64-crore-litre target is first modelled at this stage.</div>
+            <div class="stage-tags">
+              <span class="stage-tag tag-prof">GIS Specialist</span>
+              <span class="stage-tag tag-prof">Data Analyst</span>
+              <span class="stage-tag tag-prof">Landscape Architect</span>
+            </div>
+            <div class="stage-outputs">
+              <span class="output-pill">Integrated GIS data platform</span>
+              <span class="output-pill">Community priorities ranking</span>
+              <span class="output-pill">Draft hydraulic water balance</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S5 -->
+      <div class="stage-item">
+        <div class="stage-num-col"><div class="stage-num">05</div><div class="stage-line"></div></div>
+        <div class="stage-body">
+          <div class="stage-card">
+            <div class="stage-title">Analysis and Modelling<span class="kn">ವಿಶ್ಲೇಷಣೆ ಮತ್ತು ಮಾಡೆಲಿಂಗ್</span></div>
+            <div class="stage-subtitle">Seven specialist analyses run in parallel<span class="kn-sm">ಏಳು ತಜ್ಞ ವಿಶ್ಲೇಷಣೆಗಳು ಏಕಕಾಲದಲ್ಲಿ</span></div>
+            <div class="stage-desc">Hydraulic water balance (HEC-HMS) validated against 64-crore-litre target · Ecological carrying capacity and biodiversity net gain modelling · Traffic flow modelling (before/after) · CPTED safety analysis and sightline mapping · Climate and heat island modelling (ENVI-met: 2–3°C cooling projection) · Financial feasibility per phase · Social needs prioritisation from questionnaire data.</div>
+            <div class="stage-tags">
+              <span class="stage-tag tag-prof">Hydrologist</span>
+              <span class="stage-tag tag-prof">Ecologist</span>
+              <span class="stage-tag tag-prof">Transport Planner</span>
+              <span class="stage-tag tag-prof">Environmental Engineer</span>
+              <span class="stage-tag tag-prof">Financial Analyst</span>
+              <span class="stage-tag tag-prof">Landscape Architect</span>
+            </div>
+            <div class="stage-outputs">
+              <span class="output-pill">Validated hydraulic water balance</span>
+              <span class="output-pill">Climate model</span>
+              <span class="output-pill">Traffic analysis</span>
+              <span class="output-pill">Phased cost plan</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S6 -->
+      <div class="stage-item">
+        <div class="stage-num-col"><div class="stage-num">06</div><div class="stage-line"></div></div>
+        <div class="stage-body">
+          <div class="stage-card">
+            <div class="stage-title">Inference and Impact Area Documentation<span class="kn">ತೀರ್ಮಾನ ಮತ್ತು ಪ್ರಭಾವ ಪ್ರದೇಶ ದಾಖಲೆ</span></div>
+            <div class="stage-subtitle">Cross-disciplinary synthesis — what is causing what, and what matters most<span class="kn-sm">ಅಂತರ-ಶಾಸ್ತ್ರೀಯ ಸಂಶ್ಲೇಷಣೆ — ಯಾವುದು ಏನನ್ನು ಉಂಟುಮಾಡುತ್ತದೆ</span></div>
+            <div class="stage-desc">All analyses are synthesised into a coherent problem hierarchy: systemic root causes vs. immediate symptoms vs. quick wins. The Impact Area Documentation is produced — a GIS-mapped, evidence-based atlas of the full watershed condition, serving as the evidentiary foundation for the DPR and all five Tier 2 output streams.</div>
+            <div class="stage-tags">
+              <span class="stage-tag tag-prof">All 12 specialists — cross-disciplinary synthesis workshop</span>
+            </div>
+            <div class="stage-outputs">
+              <span class="output-pill">Impact Area Documentation</span>
+              <span class="output-pill">Issue hierarchy map</span>
+              <span class="output-pill">GIS watershed atlas (final)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S7 -->
+      <div class="stage-item">
+        <div class="stage-num-col"><div class="stage-num">07</div><div class="stage-line"></div></div>
+        <div class="stage-body">
+          <div class="stage-card">
+            <div class="stage-title">Stakeholder Deliberations<span class="kn">ಪಾಲುದಾರರ ಸಮಾಲೋಚನೆ</span></div>
+            <div class="stage-subtitle">Findings presented to community and institutions for validation and feedback<span class="kn-sm">ಸಮುದಾಯ ಮತ್ತು ಸಂಸ್ಥೆಗಳಿಗೆ ಮಾನ್ಯತೆ ಮತ್ತು ಪ್ರತಿಕ್ರಿಯೆಗಾಗಿ ಸಂಶೋಧನೆ ಮಂಡನೆ</span></div>
+            <div class="stage-desc">Community workshops with SG Palya, Bhabani Nagar, and Tavarekere residents, RWA members, PG operators, shop owners, and businesses. School and institutional engagement (Christ School, Christ University SDG Cell). Institutional consultations: BBMP, GBA, DULT, BWSSB, BESCOM. Community priorities are validated and incorporated. The scope of the prototype and expansion phases is confirmed.</div>
+            <div class="stage-tags">
+              <span class="stage-tag tag-prof">Community Facilitator</span>
+              <span class="stage-tag tag-prof">Landscape Architect</span>
+              <span class="stage-tag tag-prof">Hydrologist</span>
+              <span class="stage-tag tag-prof">Transport Planner</span>
+            </div>
+            <div class="stage-outputs">
+              <span class="output-pill">Community priorities report</span>
+              <span class="output-pill">Stakeholder consultation summary</span>
+              <span class="output-pill">Confirmed scope and phasing</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S8 -->
+      <div class="stage-item">
+        <div class="stage-num-col"><div class="stage-num">08</div><div class="stage-line"></div></div>
+        <div class="stage-body">
+          <div class="stage-card">
+            <div class="stage-title">DPR Preparation<span class="kn">ಸವಿಸ್ತಾರ ಯೋಜನೆ ವರದಿ ತಯಾರಿ</span> <span class="badge badge-key" style="font-size:9px;vertical-align:middle;margin-left:6px">Central Node</span></div>
+            <div class="stage-subtitle">Full Detailed Project Report across 10 components — the node from which all Tier 2 streams branch<span class="kn-sm">೧೦ ಘಟಕಗಳಾದ್ಯಂತ ಸಂಪೂರ್ಣ ಸವಿಸ್ತಾರ ಯೋಜನೆ ವರದಿ</span></div>
+            <div class="stage-desc">Engineering drawings, bills of quantities (BBMP SOR 2024), hydraulic models, biodiversity plans, anti-exotic planting policy, stormwater property guidelines, STP specifications, lake bioengineering designs, cycling infrastructure plans, and three-scenario budget validation. All ten components (A–J) prepared in full. See DPR Components section below for complete details.</div>
+            <div class="stage-tags">
+              <span class="stage-tag tag-prof">All 12 specialists</span>
+            </div>
+            <div class="stage-outputs">
+              <span class="output-pill">Full DPR (10 components)</span>
+              <span class="output-pill">BoQ per BBMP SOR 2024</span>
+              <span class="output-pill">Policy instruments (4 docs)</span>
+              <span class="output-pill">3-scenario budget validation</span>
+            </div>
+          </div>
+          <!-- Tier 2 streams teaser -->
+          <div style="background:var(--navy-lt);border-radius:8px;padding:14px 16px;margin:8px 0;border-left:3px solid var(--navy)">
+            <div style="font-size:10px;font-weight:700;color:var(--navy);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px">↳ Five Tier 2 Streams branch simultaneously from Stage 8</div>
+            <div style="display:flex;flex-wrap:wrap;gap:6px">
+              <span style="font-size:11px;background:white;color:var(--navy);padding:3px 10px;border-radius:4px;font-weight:500">1. Main DPR</span>
+              <span style="font-size:11px;background:white;color:var(--teal);padding:3px 10px;border-radius:4px;font-weight:500">2. Policy Guidelines</span>
+              <span style="font-size:11px;background:white;color:var(--amber);padding:3px 10px;border-radius:4px;font-weight:500">3. Design Guidelines (Replication)</span>
+              <span style="font-size:11px;background:white;color:var(--red);padding:3px 10px;border-radius:4px;font-weight:500">4. Impact Documentation</span>
+              <span style="font-size:11px;background:white;color:#7B1FA2;padding:3px 10px;border-radius:4px;font-weight:500">5. Community Comms Package</span>
+            </div>
+            <div style="font-size:10px;color:#666;margin-top:6px">Switch to <strong>Tier 2 tab</strong> above for full details →</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S9 PROTOTYPE -->
+      <div class="stage-item">
+        <div class="stage-num-col"><div class="stage-num" style="background:var(--teal)">09</div><div class="stage-line"></div></div>
+        <div class="stage-body">
+          <div class="stage-card stage-t2">
+            <div class="stage-title">Approvals, Funding + <span style="color:var(--teal)">Prototype Pilot</span><span class="kn">ಅನುಮೋದನೆ, ಹಣಕಾಸು + ಮಾದರಿ ಪ್ರಯೋಗ</span> <span class="badge badge-new" style="font-size:9px;vertical-align:middle;margin-left:6px">Key Stage</span></div>
+            <div class="stage-subtitle">Institutional approvals + funding secured + physically built 50 m pilot to prove the concept<span class="kn-sm">ಸಾಂಸ್ಥಿಕ ಅನುಮೋದನೆ + ಹಣಕಾಸು + ೫೦ ಮೀ ಮಾದರಿ ನಿರ್ಮಾಣ</span></div>
+            <div class="stage-desc">GBA/BBMP/DULT/BWSSB institutional approvals are obtained. BSF Small Grant and CSR sponsorships secured per module. Simultaneously, a <strong>physically built prototype</strong> of the most critical component is constructed — demonstrating the concept to the community, funders, and BBMP before committing to full Phase 1 expenditure.</div>
+            <div class="proto-highlight">
+              <div class="proto-label">Stage 9 — Prototype Deliverable / ಹಂತ ೯ — ಮಾದರಿ ಉತ್ಪಾದನೆ</div>
+              <div class="proto-title">50 m Walkway + Bioswale Pilot Stretch</div>
+              <div style="font-size:13px;color:#444;line-height:1.65;">A physically constructed 50-metre demonstration stretch combining: a 3.5 m permeable paving pedestrian walkway · A native planted bioswale alongside · GCC silt-catch pits at 10 m intervals · Native hedgerow replacing the fence on one section · Seating ledge node. This pilot generates real-world performance data (flow rates, infiltration, user counts), builds community confidence, and provides funders with tangible evidence before the ₹2–2.5 Crore Phase 1 investment is committed.</div>
+              <div class="proto-grid">
+                <div class="proto-cell"><div class="proto-cell-val">50 m</div><div class="proto-cell-lbl">Pilot Length<span class="kn-sm">ಪ್ರಾಯೋಗಿಕ ಉದ್ದ</span></div></div>
+                <div class="proto-cell"><div class="proto-cell-val">₹15–25L</div><div class="proto-cell-lbl">Est. Prototype Cost</div></div>
+                <div class="proto-cell"><div class="proto-cell-val">3 mths</div><div class="proto-cell-lbl">Build Time<span class="kn-sm">ನಿರ್ಮಾಣ ಸಮಯ</span></div></div>
+                <div class="proto-cell"><div class="proto-cell-val">6 mths</div><div class="proto-cell-lbl">Monitoring Period<span class="kn-sm">ಮೇಲ್ವಿಚಾರಣೆ ಅವಧಿ</span></div></div>
+              </div>
+            </div>
+            <div class="stage-outputs">
+              <span class="output-pill">Approved DPR</span>
+              <span class="output-pill">Tender documents ready</span>
+              <span class="output-pill">Funding confirmed per phase</span>
+              <span class="output-pill">Prototype built + monitored</span>
+              <span class="output-pill">Performance data published</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S10 -->
+      <div class="stage-item">
+        <div class="stage-num-col"><div class="stage-num">10</div><div class="stage-line"></div></div>
+        <div class="stage-body">
+          <div class="stage-card">
+            <div class="stage-title">Tendering and Procurement<span class="kn">ಟೆಂಡರ್ ಮತ್ತು ಸಂಗ್ರಹ</span></div>
+            <div class="stage-subtitle">BBMP public procurement — four phased packages<span class="kn-sm">ಬಿಬಿಎಂಪಿ ಸಾರ್ವಜನಿಕ ಸಂಗ್ರಹ — ನಾಲ್ಕು ಹಂತದ ಪ್ಯಾಕೇಜ್‌ಗಳು</span></div>
+            <div class="stage-desc">Tender documents published per phase. Pre-bid site visits (prototype stretch is the reference). Technical evaluation of contractor bids. Work order issuance. Greenscape Designz reviews technical specification compliance and supports the evaluation committee.</div>
+            <div class="stage-outputs">
+              <span class="output-pill">Work orders per phase</span>
+              <span class="output-pill">Contractor agreements</span>
+              <span class="output-pill">Construction programme</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S11 -->
+      <div class="stage-item">
+        <div class="stage-num-col"><div class="stage-num">11</div><div class="stage-line"></div></div>
+        <div class="stage-body">
+          <div class="stage-card">
+            <div class="stage-title">Phased Construction — 4 Phases, 3 Years<span class="kn">ಹಂತಬದ್ಧ ನಿರ್ಮಾಣ — ೪ ಹಂತಗಳು, ೩ ವರ್ಷಗಳು</span></div>
+            <div class="stage-subtitle">Built in logical, fundable, reversible stages<span class="kn-sm">ತಾರ್ಕಿಕ, ಧನಸಹಾಯ ಮಾಡಬಹುದಾದ, ಹಿಂತಿರುಗಿಸಬಹುದಾದ ಹಂತಗಳಲ್ಲಿ ನಿರ್ಮಿತ</span></div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;margin:10px 0">
+              <div style="background:var(--navy-lt);border-radius:6px;padding:10px"><div style="font-size:10px;font-weight:700;color:var(--navy);margin-bottom:4px">PHASE 1 — Year 1 (₹2–2.5 Cr)</div><div style="font-size:11px;color:#444">Park edge pilot · Walkways · Cycling + Skating · Fence removal + native hedge · Rajakaluve primary reach · Vehicle abatement (park + roads)</div></div>
+              <div style="background:var(--teal-lt);border-radius:6px;padding:10px"><div style="font-size:10px;font-weight:700;color:var(--teal);margin-bottom:4px">PHASE 2 — Year 2 (₹1.5–2 Cr)</div><div style="font-size:11px;color:#444">Neighbourhood drains + aquifer recharge · STP commissioning · Solid waste infra · Traffic reordering</div></div>
+              <div style="background:#FFF8E1;border-radius:6px;padding:10px"><div style="font-size:10px;font-weight:700;color:var(--amber);margin-bottom:4px">PHASE 3 — Year 3 (₹1.5–2 Cr)</div><div style="font-size:11px;color:#444">Lake deconcretisation + bioengineering · Aquatic planting · Floating wetlands · Upstream sub-catchment</div></div>
+              <div style="background:#F3E5F5;border-radius:6px;padding:10px"><div style="font-size:10px;font-weight:700;color:#7B1FA2;margin-bottom:4px">PHASE 4 — Years 4–5 (₹0.5–1 Cr)</div><div style="font-size:11px;color:#444">Policy rollout · City-wide replication · Community stewardship · Annual monitoring</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end stage-list -->
+  </div><!-- end tier-1 -->
+
+  <!-- TIER 2 -->
+  <div class="tier-panel" id="tier-2">
+    <p style="font-size:14px;color:#555;margin-bottom:20px;max-width:640px">Five documents are produced simultaneously from the DPR (Stage 8). Each stands alone and has a different audience, but all draw from the same evidence base.</p>
+    <div class="stream-grid">
+      <div class="stream-card"><div class="stream-num">01</div><div class="stream-title">Main DPR</div><div class="stream-desc">Engineering drawings, BoQ, hydraulic models, 10-component scope. Audience: BBMP, GBA, contractors.</div></div>
+      <div class="stream-card"><div class="stream-num">02</div><div class="stream-title">Policy Guidelines</div><div class="stream-desc">Anti-Exotic Planting Policy · Stormwater Disposal Guidelines for Properties · City-Wide Encroachment Prevention Framework. Audience: GBA/BBMP for formal adoption.</div></div>
+      <div class="stream-card"><div class="stream-num">03</div><div class="stream-title">Design Guidelines</div><div class="stream-desc">Replicable typology manual: "How to Revive a Park Edge in Bengaluru." Template drawings, species palettes, cost benchmarks. Audience: Any Indian city facing similar challenges.</div></div>
+      <div class="stream-card"><div class="stream-num">04</div><div class="stream-title">Impact Area Documentation</div><div class="stream-desc">Published GIS atlas of the full Koramangala Valley–Madiwala watershed. Phased intervention zones. Audience: Public, media, funders, researchers.</div></div>
+      <div class="stream-card"><div class="stream-num">05</div><div class="stream-title">Community Comms Package</div><div class="stream-desc">This website · One-pager flyer · Stakeholder presentation · BSF grant application · CSR pitch deck · Door-to-door survey questionnaire. Audience: Everyone.</div></div>
+    </div>
+  </div>
+
+  <!-- TIER 3 -->
+  <div class="tier-panel" id="tier-3">
+    <p style="font-size:14px;color:#555;margin-bottom:20px;max-width:640px">The project does not end at handover. Tier 3 is the indefinitely ongoing cycle of monitoring, stewardship, and city-wide replication.</p>
+    <div class="stage-list">
+      <div class="stage-item stage-t3">
+        <div class="stage-num-col"><div class="stage-num" style="background:#5D4037">12</div><div class="stage-line" style="background:#D7CCC8"></div></div>
+        <div class="stage-body"><div class="stage-card stage-t3">
+          <div class="stage-title">Defects Liability Period (DLP)<span class="kn">ದೋಷ ಹೊಣೆಗಾರಿಕೆ ಅವಧಿ</span></div>
+          <div class="stage-desc" style="margin-top:6px">12 months per phase. Contractor-responsible period. Greenscape Designz monitors performance, logs defects, and issues rectification notices. Ecological establishment monitored: native plant survival (target >85% at 24 months), bioswale infiltration rates, groundwater table change at monitoring points.</div>
+          <div class="stage-outputs" style="margin-top:10px"><span class="output-pill">Defect logs</span><span class="output-pill">Rectification notices</span><span class="output-pill">Ecological establishment data</span></div>
+        </div></div>
+      </div>
+      <div class="stage-item stage-t3">
+        <div class="stage-num-col"><div class="stage-num" style="background:#5D4037">13</div><div class="stage-line" style="background:#D7CCC8"></div></div>
+        <div class="stage-body"><div class="stage-card stage-t3">
+          <div class="stage-title">Monitoring, Maintenance and Community Stewardship<span class="kn">ಮೇಲ್ವಿಚಾರಣೆ, ನಿರ್ವಹಣೆ ಮತ್ತು ಸಮುದಾಯ ಸ್ಟೀವರ್ಡ್‌ಶಿಪ್</span></div>
+          <div class="stage-desc" style="margin-top:6px">Annual M&amp;E reports. Geovale Hydro Lake Health Metric public dashboard. Tree Warden programme (recruited from local residents). RWA maintenance protocols. Christ University SDG Cell citizen science (water quality, biodiversity counts). Stakeholder satisfaction surveys.</div>
+          <div class="stage-outputs" style="margin-top:10px"><span class="output-pill">Annual M&E reports</span><span class="output-pill">Geovale dashboard (public)</span><span class="output-pill">Tree Warden programme</span></div>
+        </div></div>
+      </div>
+      <div class="stage-item stage-t3">
+        <div class="stage-num-col"><div class="stage-num" style="background:#5D4037">14</div></div>
+        <div class="stage-body"><div class="stage-card stage-t3">
+          <div class="stage-title">Replication and Legacy<span class="kn">ಪ್ರತಿಕೃತಿ ಮತ್ತು ಪರಂಪರೆ</span></div>
+          <div class="stage-desc" style="margin-top:6px">Stream 3 Design Guidelines activated for adjacent park edges across Bengaluru. Policy instruments adopted by BBMP/GBA. Tavarekere becomes the canonical reference project for all future riparian revival work in the city. Annual "Tavarekere Model" workshop hosted by Greenscape Designz and GBA for other cities.</div>
+          <div class="stage-outputs" style="margin-top:10px"><span class="output-pill">Replication manual</span><span class="output-pill">Policy adopted citywide</span><span class="output-pill">Annual workshop</span></div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ─── PROTOTYPE ─────────────────────────────────────── -->
 <section id="prototype">
   <div class="sec-eyebrow">Stage 9 · Physical Pilot <span class="kn" style="display:inline;font-size:0.8em">/ ಹಂತ ೯ · ಭೌತಿಕ ಪ್ರಾಯೋಗಿಕ</span></div>
@@ -491,6 +1122,7 @@ p.sec-lead{font-size:16px;color:#555;line-height:1.7;max-width:680px;margin-bott
     <div class="map-coords">12.9225°N, 77.5977°E · Tavarekere Metro Station (Pink Line)</div>
   </div>
 </section>
+
 <!-- ─── DPR COMPONENTS ────────────────────────────────── -->
 <section id="dpr">
   <div class="sec-eyebrow">Technical Scope <span class="kn" style="display:inline;font-size:0.8em">/ ತಾಂತ್ರಿಕ ವ್ಯಾಪ್ತಿ</span></div>
@@ -803,6 +1435,60 @@ p.sec-lead{font-size:16px;color:#555;line-height:1.7;max-width:680px;margin-bott
 
   </div>
 </section>
+
+<!-- ─── COST DASHBOARD ────────────────────────────────── -->
+<section id="cost">
+  <div class="sec-eyebrow">Financial Planning <span class="kn" style="display:inline;font-size:0.8em">/ ಆರ್ಥಿಕ ಯೋಜನೆ</span></div>
+  <h2 class="sec-title">Cost Dashboard<span class="kn">ವೆಚ್ಚದ ಸಾರಾಂಶ</span></h2>
+  <p class="sec-lead">Three scenarios aligned with the Component G Budget Validation Mechanism. Select a scenario to see the component-level breakdown.</p>
+
+  <div class="scenario-pills">
+    <div class="sc-pill active" onclick="setScenario(this,0)">Scenario 1 — Baseline (₹1–2.5 Cr)</div>
+    <div class="sc-pill" onclick="setScenario(this,1)">Scenario 2 — Optimised (₹3–4 Cr)</div>
+    <div class="sc-pill" onclick="setScenario(this,2)">Scenario 3 — Enhanced (₹5–7.5 Cr)</div>
+  </div>
+
+  <div id="cost-desc" style="background:var(--navy-lt);border-radius:8px;padding:14px 18px;margin-bottom:16px;font-size:13px;color:var(--navy)"></div>
+
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+    <span style="font-size:12px;color:#666">Total estimate:</span>
+    <span class="cost-total-badge" id="cost-total"></span>
+    <span style="font-size:11px;color:#888;font-style:italic">Subject to Component G survey validation</span>
+  </div>
+
+  <table class="cost-table" id="cost-table">
+    <thead><tr><th>Component</th><th>Description</th><th>Phase</th><th>Estimate</th></tr></thead>
+    <tbody id="cost-tbody"></tbody>
+  </table>
+  <div class="cost-note">All figures are planning-level estimates. Final costs subject to BBMP SOR 2024 BoQ, survey data from Stages 3–5, and consultant validation per Component G mechanism.</div>
+</section>
+
+<!-- ─── FUNDING ───────────────────────────────────────── -->
+<section id="funding">
+  <div class="sec-eyebrow">Resources <span class="kn" style="display:inline;font-size:0.8em">/ ಸಂಪನ್ಮೂಲಗಳು</span></div>
+  <h2 class="sec-title">Funding Architecture<span class="kn">ಹಣಕಾಸು ರಚನೆ</span></h2>
+  <p class="sec-lead">Four complementary funding streams. Each phase can be triggered independently as funds are secured.</p>
+
+  <div class="bsf-box">
+    <div class="bsf-header">
+      <div>
+        <div class="bsf-badge">⚡ Urgent — Apply Now</div>
+        <div class="bsf-title">Bengaluru Sustainability Forum — Small Grants 2026<span class="kn">ಬೆಂಗಳೂರು ಸಸ್ಟೇನೆಬಿಲಿಟಿ ಫೋರಂ — ಸಣ್ಣ ಅನುದಾನ ೨೦೨೬</span></div>
+        <div class="bsf-sub">Seed funding for Phase 0.5 community surveys and stakeholder engagement</div>
+      </div>
+    </div>
+    <div class="bsf-grid">
+      <div class="bsf-cell"><div class="bsf-cell-label">Grant Amount<span class="kn-sm">ಅನುದಾನ ಮೊತ್ತ</span></div><div class="bsf-cell-val">Up to ₹5 Lakhs</div></div>
+      <div class="bsf-cell"><div class="bsf-cell-label">Application Deadline<span class="kn-sm">ಅರ್ಜಿ ಕೊನೆಯ ದಿನ</span></div><div class="bsf-cell-val" style="color:var(--red);font-weight:700">4 May 2026</div></div>
+      <div class="bsf-cell"><div class="bsf-cell-label">Funding Period<span class="kn-sm">ಧನಸಹಾಯ ಅವಧಿ</span></div><div class="bsf-cell-val">Up to 12 months</div></div>
+      <div class="bsf-cell"><div class="bsf-cell-label">Co-applicant Required<span class="kn-sm">ಸಹ-ಅರ್ಜಿದಾರ ಅಗತ್ಯ</span></div><div class="bsf-cell-val">Mr. Rajasekhar (Hydrologist) — registered entity to confirm</div></div>
+      <div class="bsf-cell"><div class="bsf-cell-label">Focus Areas<span class="kn-sm">ಗಮನ ಕ್ಷೇತ್ರಗಳು</span></div><div class="bsf-cell-val">Water, Waste, Mobility, Biodiversity, Climate</div></div>
+      <div class="bsf-cell"><div class="bsf-cell-label">Project 083 Fit<span class="kn-sm">ಯೋಜನೆ ೦೮೩ ಹೊಂದಿಕೆ</span></div><div class="bsf-cell-val" style="color:var(--teal);font-weight:600">Strong — all 5 focus areas covered</div></div>
+    </div>
+    <div style="margin-top:14px;font-size:12px;color:#666">The BSF grant covers Phase 0.5 surveys (community questionnaire, water quality testing, biodiversity baseline) — generating the evidence base that unlocks BBMP budget and CSR funding for Phase 1 construction.</div>
+  </div>
+
+  <div class="funding-grid" style="margin-top:16px">
     <div class="fund-card">
       <div class="fund-icon">🏛️</div>
       <div class="fund-title">BBMP Budget 2025-26<span class="kn">ಬಿಬಿಎಂಪಿ ಬಜೆಟ್ ೨೦೨೫-೨೬</span></div>
@@ -931,16 +1617,6 @@ p.sec-lead{font-size:16px;color:#555;line-height:1.7;max-width:680px;margin-bott
       <div class="team-role-grid">
         <div class="team-role-item">🌱 Initiator — drove community recognition of the problem</div>
         <div class="team-role-item">🗺️ Area Definition — watershed GIS boundary setting</div>
-        <div class="team-role-item">📊 Survey Coordinator — commissioning + QC of all 9 surveys</div>
-        <div class="team-role-item">🤝 Facilitator — stakeholder workshops and community engagement</div>
-        <div class="team-role-item">📋 DPR Lead Author — all 10 components</div>
-        <div class="team-role-item">💰 Funding Strategist — BSF, BBMP, CSR architecture</div>
-        <div class="team-role-item">🏗️ Design Supervisor — construction quality oversight</div>
-        <div class="team-role-item">🌿 M&E Lead — post-construction monitoring and replication</div>
-      </div>
-    </div>
-  </div>
-</section>
         <div class="team-role-item">📊 Survey Coordinator — commissioning + QC of all 9 surveys</div>
         <div class="team-role-item">🤝 Facilitator — stakeholder workshops and community engagement</div>
         <div class="team-role-item">📋 DPR Lead Author — all 10 components</div>
