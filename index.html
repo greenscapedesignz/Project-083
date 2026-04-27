@@ -6,7 +6,32 @@
 <title>Project 083 — Riparian Revival: Tavarekere (Bilingual & RFP Integrated)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=Noto+Sans+Kannada:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
+/* ═══════════════════════════════════════════════
+   LIGHTBOX MODAL
+═══════════════════════════════════════════════ */
+.img-modal {
+  display: none; position: fixed; z-index: 9999; 
+  padding-top: 60px; left: 0; top: 0; width: 100%; height: 100%; 
+  overflow: auto; background-color: rgba(0,0,0,0.92);
+}
+.img-modal-content {
+  margin: auto; display: block; width: 90%; max-width: 1200px;
+  border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  animation-name: zoom; animation-duration: 0.4s;
+}
+.img-modal-caption {
+  margin: auto; display: block; width: 80%; max-width: 800px;
+  text-align: center; color: #ccc; padding: 16px 0; height: auto;
+  font-size: 14px; animation-name: zoom; animation-duration: 0.4s;
+}
+.img-modal-caption .kn-sm { color: #888; font-size: 12px; display: block; margin-top: 4px; }
+@keyframes zoom { from {transform:scale(0.9); opacity:0} to {transform:scale(1); opacity:1} }
+.img-modal-close {
+  position: absolute; top: 20px; right: 35px; color: #f1f1f1;
+  font-size: 40px; font-weight: bold; transition: 0.3s; cursor: pointer;
+}
+.img-modal-close:hover, .img-modal-close:focus { color: var(--teal); text-decoration: none; }
+   <style>
 /* ═══════════════════════════════════════════════
    TOKENS & BASE
 ═══════════════════════════════════════════════ */
@@ -29,7 +54,7 @@ body{font-family:var(--fw-sans);background:var(--cream);color:var(--ink);font-si
    SITE IMAGES & PROPOSAL BADGES
 ═══════════════════════════════════════════════ */
 .site-img { width: 100%; border-radius: var(--r); display: block; object-fit: contain; }
-.img-caption { font-size: 11px; color: #888; font-style: italic; margin-top: 6px; text-align: center; line-height: 1.4; }
+.img-caption { font-size: 11px; color: #888; font-: italic; margin-top: 6px; text-align: center; line-height: 1.4; }
 .img-caption .kn-sm { display: inline; }
 .img-full { margin: 20px 0; }
 .img-full img { width: 100%; max-height: 360px; object-fit: contain; border-radius: var(--r); }
@@ -109,7 +134,7 @@ p.sec-lead{font-size:16px;color:#555;line-height:1.7;max-width:680px;margin-bott
 ═══════════════════════════════════════════════ */
 .vision-box{background:var(--navy);color:white;border-radius:var(--r);padding:40px;margin-top:24px;position:relative;overflow:hidden;}
 .vision-text{font-family:var(--fw-serif);font-size:clamp(18px,2.5vw,24px);color:white;line-height:1.6;position:relative;z-index:1;max-width:800px;}
-.vision-text em{color:#7FC4B0;font-style:normal}
+.vision-text em{color:#7FC4B0;font-:normal}
 
 /* ═══════════════════════════════════════════════
    TIER FLOW & PROTOTYPE
@@ -152,7 +177,7 @@ p.sec-lead{font-size:16px;color:#555;line-height:1.7;max-width:680px;margin-bott
 .acc-panel.open{display:block;padding:20px}
 .acc-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .acc-col-label{font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);font-weight:700;margin-bottom:8px}
-.acc-bullets{list-style:none;display:flex;flex-direction:column;gap:5px}
+.acc-bullets{list-:none;display:flex;flex-direction:column;gap:5px}
 .acc-bullets li{font-size:12px;color:#444;padding-left:14px;position:relative;line-height:1.5}
 .acc-bullets li::before{content:'→';position:absolute;left:0;color:var(--teal);font-size:10px;top:1px}
 .acc-budget{display:inline-block;background:var(--teal-lt);color:var(--teal);font-family:var(--fw-mono);font-size:12px;font-weight:500;padding:4px 12px;border-radius:20px;margin-top:10px;}
@@ -1022,7 +1047,11 @@ p.sec-lead{font-size:16px;color:#555;line-height:1.7;max-width:680px;margin-bott
 </footer>
 
 </main>
-
+<div id="lightboxModal" class="img-modal">
+  <span class="img-modal-close">&times;</span>
+  <img class="img-modal-content" id="lightboxImg">
+  <div id="lightboxCaption" class="img-modal-caption"></div>
+</div>
 <script>
 /* ─── HAMBURGER ─────────────────────────── */
 const ham=document.getElementById('hamburger'), sb=document.getElementById('sidebar'), ov=document.getElementById('overlay');
@@ -1060,6 +1089,42 @@ window.addEventListener('scroll',()=>{
     if(a.getAttribute('href')==='#'+current) a.classList.add('active');
   });
 },{passive:true});
+/* ─── LIGHTBOX MODAL LOGIC ──────────────── */
+const modalBox = document.getElementById("lightboxModal");
+const modalImg = document.getElementById("lightboxImg");
+const modalCaption = document.getElementById("lightboxCaption");
+const closeBtn = document.getElementsByClassName("img-modal-close")[0];
+
+// Find all images we want to make clickable
+const clickableImages = document.querySelectorAll('.site-img, .a3-container img');
+
+clickableImages.forEach(img => {
+  img.style.cursor = 'zoom-in'; // Make it look clickable
+  
+  img.addEventListener('click', function() {
+    modalBox.style.display = "block";
+    modalImg.src = this.src;
+    
+    // Look for an existing caption underneath the image
+    let captionEl = this.nextElementSibling;
+    if (captionEl && captionEl.classList.contains('img-caption')) {
+      modalCaption.innerHTML = captionEl.innerHTML;
+    } else {
+      modalCaption.innerHTML = this.alt; // Fallback to alt text
+    }
+  });
+});
+
+// Close when clicking the X
+closeBtn.onclick = function() { 
+  modalBox.style.display = "none"; 
+}
+// Close when clicking anywhere in the black background
+modalBox.onclick = function(event) {
+  if (event.target == modalBox) {
+    modalBox.style.display = "none";
+  }
+}
 </script>
 </body>
 </html>
