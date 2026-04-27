@@ -6,31 +6,6 @@
 <title>Project 083 — Riparian Revival: Tavarekere (Bilingual & RFP Integrated)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=Noto+Sans+Kannada:wght@300;400;500;600&display=swap" rel="stylesheet">
-/* ═══════════════════════════════════════════════
-   LIGHTBOX MODAL
-═══════════════════════════════════════════════ */
-.img-modal {
-  display: none; position: fixed; z-index: 9999; 
-  padding-top: 60px; left: 0; top: 0; width: 100%; height: 100%; 
-  overflow: auto; background-color: rgba(0,0,0,0.92);
-}
-.img-modal-content {
-  margin: auto; display: block; width: 90%; max-width: 1200px;
-  border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-  animation-name: zoom; animation-duration: 0.4s;
-}
-.img-modal-caption {
-  margin: auto; display: block; width: 80%; max-width: 800px;
-  text-align: center; color: #ccc; padding: 16px 0; height: auto;
-  font-size: 14px; animation-name: zoom; animation-duration: 0.4s;
-}
-.img-modal-caption .kn-sm { color: #888; font-size: 12px; display: block; margin-top: 4px; }
-@keyframes zoom { from {transform:scale(0.9); opacity:0} to {transform:scale(1); opacity:1} }
-.img-modal-close {
-  position: absolute; top: 20px; right: 35px; color: #f1f1f1;
-  font-size: 40px; font-weight: bold; transition: 0.3s; cursor: pointer;
-}
-.img-modal-close:hover, .img-modal-close:focus { color: var(--teal); text-decoration: none; }
    <style>
 /* ═══════════════════════════════════════════════
    TOKENS & BASE
@@ -207,7 +182,32 @@ p.sec-lead{font-size:16px;color:#555;line-height:1.7;max-width:680px;margin-bott
   section{padding:48px 20px}
   .acc-grid{grid-template-columns:1fr}
 }
-</style>
+/* ═══════════════════════════════════════════════
+   LIGHTBOX MODAL
+═══════════════════════════════════════════════ */
+.img-modal {
+  display: none; position: fixed; z-index: 9999; 
+  padding-top: 60px; left: 0; top: 0; width: 100%; height: 100%; 
+  overflow: auto; background-color: rgba(0,0,0,0.92);
+}
+.img-modal-content {
+  margin: auto; display: block; width: 90%; max-width: 1200px;
+  border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  animation-name: zoom; animation-duration: 0.4s;
+}
+.img-modal-caption {
+  margin: auto; display: block; width: 80%; max-width: 800px;
+  text-align: center; color: #ccc; padding: 16px 0; height: auto;
+  font-size: 14px; animation-name: zoom; animation-duration: 0.4s;
+}
+.img-modal-caption .kn-sm { color: #888; font-size: 12px; display: block; margin-top: 4px; }
+@keyframes zoom { from {transform:scale(0.9); opacity:0} to {transform:scale(1); opacity:1} }
+.img-modal-close {
+  position: absolute; top: 20px; right: 35px; color: #f1f1f1;
+  font-size: 40px; font-weight: bold; transition: 0.3s; cursor: pointer;
+}
+.img-modal-close:hover, .img-modal-close:focus { color: var(--teal); text-decoration: none; }
+   </style>
 </head>
 <body>
 <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -1089,6 +1089,42 @@ window.addEventListener('scroll',()=>{
     if(a.getAttribute('href')==='#'+current) a.classList.add('active');
   });
 },{passive:true});
+/* ─── LIGHTBOX MODAL LOGIC ──────────────── */
+const modalBox = document.getElementById("lightboxModal");
+const modalImg = document.getElementById("lightboxImg");
+const modalCaption = document.getElementById("lightboxCaption");
+const closeBtn = document.getElementsByClassName("img-modal-close")[0];
+
+// Find all images we want to make clickable
+const clickableImages = document.querySelectorAll('.site-img, .a3-container img');
+
+clickableImages.forEach(img => {
+  img.style.cursor = 'zoom-in'; // Make it look clickable
+  
+  img.addEventListener('click', function() {
+    modalBox.style.display = "block";
+    modalImg.src = this.src;
+    
+    // Look for an existing caption underneath the image
+    let captionEl = this.nextElementSibling;
+    if (captionEl && captionEl.classList.contains('img-caption')) {
+      modalCaption.innerHTML = captionEl.innerHTML;
+    } else {
+      modalCaption.innerHTML = this.alt; // Fallback to alt text
+    }
+  });
+});
+
+// Close when clicking the X
+closeBtn.onclick = function() { 
+  modalBox.style.display = "none"; 
+}
+// Close when clicking anywhere in the black background
+modalBox.onclick = function(event) {
+  if (event.target == modalBox) {
+    modalBox.style.display = "none";
+  }
+}
 /* ─── LIGHTBOX MODAL LOGIC ──────────────── */
 const modalBox = document.getElementById("lightboxModal");
 const modalImg = document.getElementById("lightboxImg");
